@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 
+import  { component1, component2} form '../components/in'
+import compo
+
 function App() {
   return (
     <div id="meals">
