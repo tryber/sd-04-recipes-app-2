@@ -11,12 +11,10 @@ const ContextProvider = ({ children }) => {
   const [meals, setMeals] = useState([]);
 
   const handleSuccess = (response, callback) => {
-    setLoading(false);
     return callback(response);
   };
 
   const handleFailure = (error) => {
-    setLoading(false);
     return console.error(error.message);
   };
 
@@ -27,24 +25,27 @@ const ContextProvider = ({ children }) => {
   };
 
   const getRandomMeals = async () => {
-    const spreadMeals = [...meals];
+    const newMeals = [];
     for (let i = 0; i < 12; i += 1) {
-      getApi(randomMealURL, (meal) => {
-        const mealObj = meal[0];
-        const newMeals = spreadMeals.push(mealObj);
-        console.log(newMeals);
+      getApi(randomMealURL, async (meal) => {
+        newMeals.push(...meal);
+        if (i === 11) {
+          setMeals([...newMeals]);
+          setLoading(false);
+        }
       });
     }
   };
 
-  useEffect(() => {
-    getApi(categoriesURL, setCategories);
-    getApi(areasURL, setAreas);
-    getApi(ingredientsURL, setIngredients);
-    getRandomMeals();
+  useEffect(async () => {
+    setLoading(true);
+    await getApi(categoriesURL, setCategories);
+    await getApi(areasURL, setAreas);
+    await getApi(ingredientsURL, setIngredients);
+    await getRandomMeals();
   }, []);
 
-  const contextValue = { loading, categories, areas, ingredients };
+  const contextValue = { loading, categories, areas, ingredients, meals };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
