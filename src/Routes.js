@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Login } from './pages';
+import Login from './pages/login/Login';
+// import { Login } from './pages';
 
-const Routes = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" component={Login} />
-        {/* <Route path="/comidas" component={} />
+const Routes = () => (
+  <BrowserRouter>
+    <Switch>
+      <Route path="/" component={Login} />
+      {/* <Route path="/comidas" component={} />
         <Route path="/bebidas" component={} />
         <Route path="/comidas/:id" component={} />
         <Route path="/bebidas/:id" component={} />
@@ -22,9 +22,8 @@ const Routes = () => {
         <Route path="/perfil" component={} />
         <Route path="/receitas-feitas" component={} />
         <Route path="/receitas-favoritas" component={} /> */}
-      </Switch>
-    </BrowserRouter>
-  );
-};
+    </Switch>
+  </BrowserRouter>
+);
 
 export default Routes;

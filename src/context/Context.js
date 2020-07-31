@@ -11,13 +11,9 @@ const ContextProvider = ({ children }) => {
   const [ingredients, setIngredients] = useState([]);
   const [meals, setMeals] = useState([]);
 
-  const handleSuccess = (response, callback) => {
-    return callback(response);
-  };
+  const handleSuccess = (response, callback) => callback(response);
 
-  const handleFailure = (error) => {
-    return console.error(error.message);
-  };
+  const handleFailure = (error) => console.error(error.message);
 
   const getApi = async (URL, callback) => {
     if (loading) return null;
@@ -25,14 +21,14 @@ const ContextProvider = ({ children }) => {
     return fetchApi(URL).then((response) => handleSuccess(response, callback), handleFailure);
   };
 
-  const getRandomMeals = async () => {
+  const getRandomMeals = () => {
     const newMeals = [];
     for (let i = 0; i < 12; i += 1) {
-      getApi(randomMealURL, async (meal) => {
+      getApi(randomMealURL, (meal) => {
         newMeals.push(...meal);
         if (i === 11) {
-          setMeals([...newMeals]);
           setLoading(false);
+          setMeals([...newMeals]);
         }
       });
     }
