@@ -16,15 +16,15 @@
 } */
 
 /* #iceLeft { */
-  /* transform-origin set in px for firefox compatibility */
-  /* opacity: 0.6;
+/* transform-origin set in px for firefox compatibility */
+/* opacity: 0.6;
   transform-origin: 36px 66px;
   animation: clink .8s infinite ease;
 } */
 
 /* #iceRight { */
-  /* transform-origin set in px for firefox compatibility */
-  /* opacity: 0.6;
+/* transform-origin set in px for firefox compatibility */
+/* opacity: 0.6;
   transform-origin: 60px 78px;
   animation: clink .8s .2s infinite ease;
 } */
@@ -69,7 +69,7 @@
   --black: #000000;
   --grayHeavy: #494848;
   --grayMedium: #f4f3f3;
-  --primary: #B3A485;
+  --primary: #b3a485;
   --white: #ffffff;
 }
 
