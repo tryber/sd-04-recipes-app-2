@@ -24,6 +24,9 @@ LoginContainer.H1 = styled(H1)`
 LoginContainer.Input = styled(Input)``;
 
 LoginContainer.Button = styled(Button)`
+  &:disabled {
+    opacity: 0.5;
+  }
 `;
 
 export default LoginContainer;
