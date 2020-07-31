@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchApi, { categoriesURL, areasURL, ingredientsURL, randomMealURL } from '../services/api';
 
-const Context = createContext();
+export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
