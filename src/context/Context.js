@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import fetchApi, { categoriesURL, areasURL, ingredientsURL, randomMealURL } from '../services/api';
+import PropTypes from 'prop-types';
 
 const Context = createContext();
 
@@ -37,12 +38,12 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     setLoading(true);
-    await getApi(categoriesURL, setCategories);
-    await getApi(areasURL, setAreas);
-    await getApi(ingredientsURL, setIngredients);
-    await getRandomMeals();
+    getApi(categoriesURL, setCategories);
+    getApi(areasURL, setAreas);
+    getApi(ingredientsURL, setIngredients);
+    getRandomMeals();
   }, []);
 
   const contextValue = { loading, categories, areas, ingredients, meals };
@@ -51,3 +52,7 @@ const ContextProvider = ({ children }) => {
 };
 
 export default ContextProvider;
+
+ContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
