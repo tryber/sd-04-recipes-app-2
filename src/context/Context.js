@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
-import fetchApi, { categoriesURL, areasURL, ingredientsURL, randomMealURL } from '../services/api';
 import PropTypes from 'prop-types';
+import fetchApi, { categoriesURL, areasURL, ingredientsURL, randomMealURL } from '../services/api';
 
 const Context = createContext();
 
