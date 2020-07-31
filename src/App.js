@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
 import Login from './pages/login/Login';
+
 function App() {
   return (
     <div id="meals">
-    <Login />
+      <Login />
       {/* <span>TRYBE</span>
       <svg xmlns="http://www.w3.org/2000/svg" id="rocksGlass" viewBox="-8.233 -8.233 122.466 122.466" height="300px">
         <path d=" M 12.556 103 L 3 3 L 103 3 L 93.347 103 L 12.556 103 L 12.556 103 Z " fill="rgb(255,255,255)" vector-effect="non-scaling-stroke" stroke-width="5.616" stroke="rgb(70,70,70)" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" />

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
+const Button = styled.button`
   background-color: var(--primary);
   border-radius: 30px;
   border-style: none;
@@ -20,3 +20,5 @@ export const Button = styled.button`
     opacity: 0.5;
   }
 `;
+
+export default Button;

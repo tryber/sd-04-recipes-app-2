@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const AppContainer = styled.section`
+const AppContainer = styled.section`
   background-color: var(--white);
   display: flex;
   flex-direction: column;
@@ -11,3 +11,5 @@ export const AppContainer = styled.section`
     width: 100vw;
   }
 `;
+
+export default AppContainer;
