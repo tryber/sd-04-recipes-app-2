@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import AppContainer from '../../components/appContainer/styles';
-import H1 from '../../components/h1/styles';
-import Input from '../../components/input/styles';
-import Button from '../../components/button/styles';
+import AppContainer from '../../styledComponents/appContainer/styles';
+import H1 from '../../styledComponents/h1/styles';
+import Input from '../../styledComponents/input/styles';
+import Button from '../../styledComponents/button/styles';
 
 const LoginContainer = styled(AppContainer)`
   align-items: center;
@@ -18,10 +18,12 @@ LoginContainer.Img = styled.img`
   }
 `;
 
-LoginContainer.H1 = styled(H1)``;
+LoginContainer.H1 = styled(H1)`
+`;
 
 LoginContainer.Input = styled(Input)``;
 
-LoginContainer.Button = styled(Button)``;
+LoginContainer.Button = styled(Button)`
+`;
 
 export default LoginContainer;
