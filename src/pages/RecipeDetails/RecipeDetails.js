@@ -16,9 +16,8 @@ const RecipeDetails = ({
   return <div>Hello food. {id}</div>;
 };
 
-/* RecipeDetails.propTypes = {
-  match: PropTypes.shape({ id: PropTypes.number.isRequired }),
-  // id: PropTypes.number.isRequired,
-}; */
+RecipeDetails.propTypes = {
+  match: PropTypes.shape({ id: PropTypes.number}).isRequired,
+};
 
 export default RecipeDetails;
