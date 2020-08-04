@@ -1,11 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-const FoodCard = ({ thumb, str }) => (
-  <div>
-    <img src={thumb} alt={str} />
-    <p>{str}</p>
-  </div>
+const RecipeCard = styled.div`
+  width: 200px;
+`;
+
+const FoodCard = ({ index, thumb, str, id }) => (
+  <RecipeCard data-testid={`${index}-recipe-card`}>
+    {/* Retirar o 'style in line' da tag img, e fazer o css para ela. */}
+    <Link to={`/comidas/${id}`}>
+      <img data-testid={`${index}-card-img`} src={thumb} alt={str} style={{ width: '200px' }} />
+      <p data-testid={`${index}-card-name`}>{str}</p>
+    </Link>
+  </RecipeCard>
 );
 
 export default FoodCard;
@@ -13,4 +22,6 @@ export default FoodCard;
 FoodCard.propTypes = {
   thumb: PropTypes.string.isRequired,
   str: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
 };

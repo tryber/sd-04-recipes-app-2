@@ -54,6 +54,7 @@ const Login = () => {
           validateInputs(email, password, setDisabled);
         }}
       />
+      {/* Só muda de pág. se clicar no link, no resto seta o localstorage */}
       <LoginContainer.Button
         data-testid="login-submit-btn"
         type="button"

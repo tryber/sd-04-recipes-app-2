@@ -1,6 +1,15 @@
 import React, { useContext } from 'react';
+import styled from 'styled-components';
 import { Context } from '../../context/Context';
 import FoodCard from '../../components/foodCard/FoodCard';
+
+const FoodsContainer = styled.div`
+  width: 100vw;
+  padding: 5%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+`;
 
 const MainPage = () => {
   const { loading, categories, /* areas, ingredients, */ meals } = useContext(Context);
@@ -12,10 +21,17 @@ const MainPage = () => {
       {categories.map(({ strCategory }) => (
         <button>{strCategory}</button>
       ))}
-
-      {meals.map(({ idMeal, strMealThumb, strMeal }) => (
-        <FoodCard key={`${idMeal} ${strMeal}`} thumb={strMealThumb} str={strMeal} />
-      ))}
+      <FoodsContainer>
+        {meals.map(({ idMeal, strMealThumb, strMeal }, index) => (
+          <FoodCard
+            key={`${idMeal} ${strMeal}`}
+            thumb={strMealThumb}
+            str={strMeal}
+            index={index}
+            id={idMeal}
+          />
+        ))}
+      </FoodsContainer>
     </div>
   );
 };

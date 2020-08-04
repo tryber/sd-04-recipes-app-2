@@ -1,14 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Login, MainPage } from './pages';
+import { Login, MainPage, RecipeDetails } from './pages';
 
 const Routes = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={Login} />
-      <Route path="/comidas" component={MainPage} />
-      {/* <Route path="/bebidas" component={} />
-        <Route path="/comidas/:id" component={} />
+      <Route exact path="/comidas" component={MainPage} />
+      {/* <Route path="/bebidas" component={} /> */}
+      <Route path="/comidas/:id" component={RecipeDetails} />
+      {/*
         <Route path="/bebidas/:id" component={} />
         <Route path="/comidas/:id/in-progress" component={} />
         <Route path="/bebidas/:id/in-progress" component={} />
