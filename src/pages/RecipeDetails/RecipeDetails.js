@@ -17,7 +17,8 @@ const RecipeDetails = ({
 };
 
 RecipeDetails.propTypes = {
-  id: PropTypes.number.isRequired,
+  match: PropTypes.object.isRequired,
+  // id: PropTypes.number.isRequired,
 };
 
 export default RecipeDetails;
