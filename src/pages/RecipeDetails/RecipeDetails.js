@@ -17,7 +17,7 @@ const RecipeDetails = ({
 };
 
 RecipeDetails.propTypes = {
-  match: PropTypes.object.isRequired,
+  match: PropTypes.shape({id: PropTypes.number.isRequired}),
   // id: PropTypes.number.isRequired,
 };
 
