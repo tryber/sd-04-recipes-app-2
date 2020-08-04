@@ -3,7 +3,7 @@ import { Context } from '../../context/Context';
 import FoodCard from '../../components/foodCard/FoodCard';
 
 const MainPage = () => {
-  const { loading, categories, areas, ingredients, meals } = useContext(Context);
+  const { loading, categories, /* areas, ingredients, */ meals } = useContext(Context);
   console.log(categories);
   if (loading) return <p>Loading...</p>;
 
