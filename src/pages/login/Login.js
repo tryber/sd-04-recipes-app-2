@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import LoginContainer from './styles';
 import CoverPic from '../../images/cover-pic.jpeg';
 
@@ -54,15 +53,16 @@ const Login = () => {
           validateInputs(email, password, setDisabled);
         }}
       />
-      {/* Só muda de pág. se clicar no link, no resto seta o localstorage */}
-      <LoginContainer.Button
-        data-testid="login-submit-btn"
-        type="button"
-        disabled={disabled}
-        onClick={() => setLocalStorage(email)}
-      >
-        <Link to="/comidas">Log in</Link>
-      </LoginContainer.Button>
+      <LoginContainer.Link to="/comidas">
+        <LoginContainer.Button
+          data-testid="login-submit-btn"
+          type="button"
+          disabled={disabled}
+          onClick={() => setLocalStorage(email)}
+        >
+          Log in
+        </LoginContainer.Button>
+      </LoginContainer.Link>
     </LoginContainer>
   );
 };
