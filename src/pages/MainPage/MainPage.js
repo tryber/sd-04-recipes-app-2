@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../context/Context';
-import FoodCard from '../../components/foodCard/FoodCard';
+import { FoodCard, BottomMenu } from '../../components';
 
 const FoodsContainer = styled.div`
   width: 100vw;
@@ -32,6 +32,7 @@ const MainPage = () => {
           />
         ))}
       </FoodsContainer>
+      <BottomMenu />
     </div>
   );
 };
