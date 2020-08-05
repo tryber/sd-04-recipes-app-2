@@ -30,7 +30,7 @@ const checkLength = (type, arr, setRedirect, foodType, setFunc) => {
         ],
     });
   }
-  setFunc(arr);
+  return setFunc(arr);
 };
 
 const checkAll = (resp, type, setRedirect, foodType, setFunc) => {
