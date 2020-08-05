@@ -1,30 +1,36 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Context } from '../../context/Context';
-import { getMealsByIndredient, getMealsByName, getMealsByFirstLetter } from '../../services/api';
+import { getFoodsByIndredient, getFoodsByName, getFoodsByFirstLetter } from '../../services/api';
 
 const handler = (event, setFunt) => {
   setFunt(event.target.value);
 };
 
-const filterMeals = (input, option, setFunc) => {
+const filterFoods = (foodType, input, option, setFunc) => {
+  let type = 'cocktail';
+  if (foodType === 'Comidas') {
+    type = 'meal';
+  }
+
   switch (option) {
     case 'ingredient':
-      getMealsByIndredient(input).then(setFunc);
+      getFoodsByIndredient(type, input).then(setFunc);
       break;
     case 'name':
-      getMealsByName(input).then(setFunc);
+      getFoodsByName(type, input).then(setFunc);
       break;
     case 'first-letter':
-      getMealsByFirstLetter(input).then(setFunc);
+      getFoodsByFirstLetter(type, input).then(setFunc);
       break;
     default:
   }
 };
 
-const SearchBar = () => {
+const SearchBar = ({ foodType }) => {
   const [inputText, setInputText] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
-  const { setMeals } = useContext(Context);
+  const { setMeals, setDrinks } = useContext(Context);
 
   const createInputRadio = (value, testid, name) => (
     <label htmlFor={value}>
@@ -54,7 +60,13 @@ const SearchBar = () => {
       <button
         data-testid="exec-search-btn"
         type="button"
-        onClick={() => filterMeals(inputText, selectedOption, setMeals)}
+        onClick={() => {
+          if (foodType === 'Comidas') {
+            filterFoods(foodType, inputText, selectedOption, setMeals);
+          } else {
+            filterFoods(foodType, inputText, selectedOption, setDrinks);
+          }
+        }}
       >
         Search
       </button>
@@ -63,3 +75,7 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
+SearchBar.propTypes = {
+  foodType: PropTypes.string.isRequired,
+};
