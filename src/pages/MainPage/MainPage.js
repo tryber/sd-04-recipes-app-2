@@ -13,7 +13,6 @@ const FoodsContainer = styled.div`
 
 const MainPage = () => {
   const { loading, categories, /* areas, ingredients, */ meals } = useContext(Context);
-  console.log(categories);
   if (loading) return <p>Loading...</p>;
 
   return (
