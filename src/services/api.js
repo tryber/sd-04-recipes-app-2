@@ -4,11 +4,7 @@ export const ingredientsURL = 'https://www.themealdb.com/api/json/v1/1/list.php?
 export const randomMealURL = 'https://www.themealdb.com/api/json/v1/1/random.php';
 export const initialMealsURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 export const initialDrinksURL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-
 export const mealByIdURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-export const mealsByIngredientURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
-export const mealsByNameURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-export const mealsByFirstLetterURL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=';
 
 const fetchApi = async (URL) => {
   const responseKey = /meal/.test(URL) ? 'meals' : 'drinks';
@@ -19,10 +15,13 @@ const fetchApi = async (URL) => {
 
 const getMealById = (id) => fetchApi(`${mealByIdURL}${id}`);
 
-const getMealsByIndredient = (ingredient) => fetchApi(`${mealsByIngredientURL}${ingredient}`);
+const getFoodsByIndredient = (type, ingredient) =>
+  fetchApi(`https://www.the${type}db.com/api/json/v1/1/filter.php?i=${ingredient}`);
 
-const getMealsByName = (name) => fetchApi(`${mealsByNameURL}${name}`);
+const getFoodsByName = (type, name) =>
+  fetchApi(`https://www.the${type}db.com/api/json/v1/1/search.php?s=${name}`);
 
-const getMealsByFirstLetter = (firstLetter) => fetchApi(`${mealsByFirstLetterURL}${firstLetter}`);
+const getFoodsByFirstLetter = (type, firstLetter) =>
+  fetchApi(`https://www.the${type}db.com/api/json/v1/1/search.php?f=${firstLetter}`);
 
-export { fetchApi, getMealById, getMealsByIndredient, getMealsByName, getMealsByFirstLetter };
+export { fetchApi, getMealById, getFoodsByIndredient, getFoodsByName, getFoodsByFirstLetter };
