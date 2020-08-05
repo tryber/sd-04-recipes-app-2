@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
 import { Context } from '../../context/Context';
 import { Header, FoodCard } from '../../components';
 
@@ -11,25 +13,27 @@ const FoodsContainer = styled.div`
   justify-content: space-around;
 `;
 
-const MainPage = () => {
-  const { loading, categories, /* areas, ingredients, */ meals } = useContext(Context);
-  console.log(categories);
+const MainPage = ({ foodType }) => {
+  const { loading, categories, /* areas, ingredients, */ meals, drinks } = useContext(Context);
   if (loading) return <p>Loading...</p>;
+  const mealValues = { list: [...meals], key: 'Meal', title: 'Comidas' };
+  const drinkValues = { list: [...drinks], key: 'Drink', title: 'Bebidas' };
+  const foods = foodType === 'comidas' ? mealValues : drinkValues;
 
   return (
     <div>
-      <Header pageTitle="Comidas" />
+      <Header pageTitle={foods.title} />
       {categories.map(({ strCategory }) => (
-        <button>{strCategory}</button>
+        <button type="button">{strCategory}</button>
       ))}
       <FoodsContainer>
-        {meals.map(({ idMeal, strMealThumb, strMeal }, index) => (
+        {foods.list.slice(0, 12).map((food, index) => (
           <FoodCard
-            key={`${idMeal} ${strMeal}`}
-            thumb={strMealThumb}
-            str={strMeal}
+            key={`${foods[`id${foods.Key}`]} ${foods[`str${foods.Key}`]}`}
+            thumb={food[`str${foods.key}Thumb`]}
+            str={food[`str${foods.key}`]}
             index={index}
-            id={idMeal}
+            id={food[`id${foods.Key}`]}
           />
         ))}
       </FoodsContainer>
@@ -38,3 +42,7 @@ const MainPage = () => {
 };
 
 export default MainPage;
+
+MainPage.propTypes = {
+  foodType: PropTypes.string.isRequired,
+};
