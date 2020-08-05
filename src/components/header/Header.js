@@ -11,11 +11,11 @@ const Header = ({ pageTitle }) => {
   return (
     <HeaderContainer>
       <HeaderContainer.DefaultHeader>
-        <HeaderContainer.UserLink to="/perfil">
+        <HeaderContainer.UserLink data-testid="profile-top-btn" to="/perfil">
           <img src={ProfileIcon} alt="Profile icon" />
         </HeaderContainer.UserLink>
-        <HeaderContainer.Title>{pageTitle}</HeaderContainer.Title>
-        <HeaderContainer.SearchButton onClick={() => setDisplaySearchBar(!displaySearchBar)}>
+        <HeaderContainer.Title data-testid="page-title">{pageTitle}</HeaderContainer.Title>
+        <HeaderContainer.SearchButton data-testid="search-top-btn" onClick={() => setDisplaySearchBar(!displaySearchBar)}>
           <img src={SearchIcon} alt="Search icon" />
         </HeaderContainer.SearchButton>
       </HeaderContainer.DefaultHeader>
