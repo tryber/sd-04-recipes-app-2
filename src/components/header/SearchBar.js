@@ -8,7 +8,15 @@ const handler = (event, setFunt) => {
   setFunt(event.target.value);
 };
 
-const checkLength = (type, arr, setRedirect, foodType) => {
+const checkIsNull = (resp) => {
+  if (!resp) {
+    return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  }
+  return null;
+};
+
+const checkLength = (type, arr, setRedirect, foodType, setFunc) => {
+  if (!arr) return null;
   if (arr.length === 1) {
     setRedirect({
       shouldRedirect: true,
@@ -22,6 +30,12 @@ const checkLength = (type, arr, setRedirect, foodType) => {
         ],
     });
   }
+  setFunc(arr);
+};
+
+const checkAll = (resp, type, setRedirect, foodType, setFunc) => {
+  checkIsNull(resp);
+  checkLength(type, resp, setRedirect, foodType, setFunc);
 };
 
 const filterFoods = (foodType, input, option, setFunc, setRedirect) => {
@@ -32,21 +46,18 @@ const filterFoods = (foodType, input, option, setFunc, setRedirect) => {
   switch (option) {
     case 'ingredient':
       getFoodsByIndredient(type, input).then((resp) => {
-        checkLength(type, resp, setRedirect, foodType);
-        setFunc(resp);
+        checkAll(resp, type, setRedirect, foodType, setFunc);
       });
       break;
     case 'name':
       getFoodsByName(type, input).then((resp) => {
-        checkLength(type, resp, setRedirect, foodType);
-        setFunc(resp);
+        checkAll(resp, type, setRedirect, foodType, setFunc);
       });
       break;
     case 'first-letter':
       if (input.length === 1) {
         getFoodsByFirstLetter(type, input).then((resp) => {
-          checkLength(type, resp, setRedirect, foodType);
-          setFunc(resp);
+          checkAll(resp, type, setRedirect, foodType, setFunc);
         });
       } else {
         alert('Sua busca deve conter somente 1 (um) caracter');
