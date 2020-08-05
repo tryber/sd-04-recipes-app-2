@@ -42,7 +42,7 @@ const ContextProvider = ({ children }) => {
     getRandomMeals();
   }, []);
 
-  const contextValue = { loading, categories, areas, ingredients, meals };
+  const contextValue = { loading, categories, areas, ingredients, meals, setMeals };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
