@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import HeaderContainer from './styles';
 import SearchBar from './SearchBar';
 import ProfileIcon from '../../images/profileIcon.svg';
@@ -24,3 +25,7 @@ const Header = ({ pageTitle }) => {
 };
 
 export default Header;
+
+Header.propTypes = {
+  pageTitle: PropTypes.string.isRequired,
+};

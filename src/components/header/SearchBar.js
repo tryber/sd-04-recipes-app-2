@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, /* useContext */ } from 'react';
 
 const SearchBar = () => {
-  const [inputText, setInputText] = useState('');
+  const [/* inputText */, setInputText] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
 
   const handler = (event, setFunt) => {
@@ -9,7 +9,7 @@ const SearchBar = () => {
   };
 
   const createInputRadio = (value, testid, name) => (
-    <label forHTML={value}>
+    <label htmlFor={value}>
       <input
         value={value}
         type="radio"
