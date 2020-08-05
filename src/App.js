@@ -6,9 +6,11 @@ import ContextProvider from './context/Context';
 
 function App() {
   return (
-    <ContextProvider id="meals">
-      <Routes />
-    </ContextProvider>
+    <div id="meals">
+      <ContextProvider>
+        <Routes />
+      </ContextProvider>
+    </div>
   );
 }
 
