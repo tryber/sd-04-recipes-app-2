@@ -58,7 +58,16 @@ const ContextProvider = ({ children }) => {
     getAllApis();
   }, []);
 
-  const contextValue = { loading, categories, areas, ingredients, meals, setMeals, drinks, setDrinks };
+  const contextValue = {
+    loading,
+    categories,
+    areas,
+    ingredients,
+    meals,
+    setMeals,
+    drinks,
+    setDrinks,
+  };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
