@@ -19,7 +19,7 @@ const Header = ({ pageTitle }) => {
           <img src={SearchIcon} alt="Search icon" />
         </HeaderContainer.SearchButton>
       </HeaderContainer.DefaultHeader>
-      {displaySearchBar && <SearchBar />}
+      {displaySearchBar && <SearchBar foodType={pageTitle} />}
     </HeaderContainer>
   );
 };
