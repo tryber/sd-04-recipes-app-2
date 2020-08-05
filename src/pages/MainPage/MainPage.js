@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../context/Context';
-import FoodCard from '../../components/foodCard/FoodCard';
+import { Header, FoodCard } from '../../components';
 
 const FoodsContainer = styled.div`
   width: 100vw;
@@ -18,6 +18,7 @@ const MainPage = () => {
 
   return (
     <div>
+      <Header pageTitle="Comidas" />
       {categories.map(({ strCategory }) => (
         <button>{strCategory}</button>
       ))}

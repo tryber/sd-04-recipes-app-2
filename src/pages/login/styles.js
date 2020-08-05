@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import AppContainer from '../../styledComponents/appContainer/styles';
 import H1 from '../../styledComponents/h1/styles';
 import Input from '../../styledComponents/input/styles';
@@ -18,14 +19,18 @@ LoginContainer.Img = styled.img`
   }
 `;
 
-LoginContainer.H1 = styled(H1)`
-`;
+LoginContainer.H1 = styled(H1)``;
 
 LoginContainer.Input = styled(Input)``;
 
+LoginContainer.Link = styled(Link)`
+  width: 30vw;
+`;
+
 LoginContainer.Button = styled(Button)`
   &:disabled {
-    opacity: 0.5;
+    cursor: default;
+    opacity: 0.6;
   }
 `;
 
