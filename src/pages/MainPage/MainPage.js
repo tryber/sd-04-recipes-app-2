@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { Context } from '../../context/Context';
-import { Header, FoodCard } from '../../components';
+import { Header, FoodCard, BottomMenu } from '../../components';
 
 const FoodsContainer = styled.div`
   width: 100vw;
@@ -38,6 +38,7 @@ const MainPage = ({ foodType }) => {
           />
         ))}
       </FoodsContainer>
+      <BottomMenu />
     </div>
   );
 };
