@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { Context } from '../../context/Context';
 import { getFoodsByIndredient, getFoodsByName, getFoodsByFirstLetter } from '../../services/api';
 
@@ -7,27 +8,56 @@ const handler = (event, setFunt) => {
   setFunt(event.target.value);
 };
 
-const filterFoods = (foodType, input, option, setFunc) => {
+const checkLength = (type, arr, setRedirect, foodType) => {
+  if (arr.length === 1) {
+    setRedirect({
+      shouldRedirect: true,
+      type: foodType.toLowerCase(),
+      id:
+        arr[0][
+          `id${type
+            .split('')
+            .map((char, i) => (i === 0 ? char.toUpperCase() : char))
+            .join('')}`
+        ],
+    });
+  }
+};
+
+const filterFoods = (foodType, input, option, setFunc, setRedirect) => {
   let type = 'cocktail';
   if (foodType === 'Comidas') {
     type = 'meal';
   }
-
   switch (option) {
     case 'ingredient':
-      getFoodsByIndredient(type, input).then(setFunc);
+      getFoodsByIndredient(type, input).then((resp) => {
+        checkLength(type, resp, setRedirect, foodType);
+        setFunc(resp);
+      });
       break;
     case 'name':
-      getFoodsByName(type, input).then(setFunc);
+      getFoodsByName(type, input).then((resp) => {
+        checkLength(type, resp, setRedirect, foodType);
+        setFunc(resp);
+      });
       break;
     case 'first-letter':
-      getFoodsByFirstLetter(type, input).then(setFunc);
+      if (input.length === 1) {
+        getFoodsByFirstLetter(type, input).then((resp) => {
+          checkLength(type, resp, setRedirect, foodType);
+          setFunc(resp);
+        });
+      } else {
+        alert('Sua busca deve conter somente 1 (um) caracter');
+      }
       break;
     default:
   }
 };
 
 const SearchBar = ({ foodType }) => {
+  const [redirect, setShoudlRedirect] = useState({ shouldRedirect: false, type: '', id: '' });
   const [inputText, setInputText] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const { setMeals, setDrinks } = useContext(Context);
@@ -45,7 +75,7 @@ const SearchBar = ({ foodType }) => {
       {name}
     </label>
   );
-
+  if (redirect.shouldRedirect) return <Redirect to={`/${redirect.type}/${redirect.id}`} />;
   return (
     <div>
       <input
@@ -62,9 +92,9 @@ const SearchBar = ({ foodType }) => {
         type="button"
         onClick={() => {
           if (foodType === 'Comidas') {
-            filterFoods(foodType, inputText, selectedOption, setMeals);
+            filterFoods(foodType, inputText, selectedOption, setMeals, setShoudlRedirect);
           } else {
-            filterFoods(foodType, inputText, selectedOption, setDrinks);
+            filterFoods(foodType, inputText, selectedOption, setDrinks, setShoudlRedirect);
           }
         }}
       >

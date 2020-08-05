@@ -30,11 +30,11 @@ const MainPage = ({ foodType }) => {
       <FoodsContainer>
         {foods.list.slice(0, 12).map((food, index) => (
           <FoodCard
-            key={`${foods[`id${foods.Key}`]} ${foods[`str${foods.Key}`]}`}
+            key={`${foods[`id${foods.key}`]} ${foods[`str${foods.key}`]}`}
             thumb={food[`str${foods.key}Thumb`]}
             str={food[`str${foods.key}`]}
             index={index}
-            id={food[`id${foods.Key}`]}
+            id={food[`id${foods.key}`]}
           />
         ))}
       </FoodsContainer>
