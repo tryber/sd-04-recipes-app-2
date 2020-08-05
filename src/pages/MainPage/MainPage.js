@@ -15,6 +15,7 @@ const FoodsContainer = styled.div`
 
 const MainPage = ({ foodType }) => {
   const { loading, categories, /* areas, ingredients, */ meals, drinks } = useContext(Context);
+
   if (loading) return <p>Loading...</p>;
   const mealValues = { list: [...meals], key: 'Meal', title: 'Comidas' };
   const drinkValues = { list: [...drinks], key: 'Drink', title: 'Bebidas' };

@@ -6,6 +6,9 @@ export const initialMealsURL = 'https://www.themealdb.com/api/json/v1/1/search.p
 export const initialDrinksURL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
 export const mealByIdURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+export const mealsByIngredientURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
+export const mealsByNameURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+export const mealsByFirstLetterURL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=';
 
 const fetchApi = async (URL) => {
   const responseKey = /meal/.test(URL) ? 'meals' : 'drinks';
@@ -16,4 +19,10 @@ const fetchApi = async (URL) => {
 
 const getMealById = (id) => fetchApi(`${mealByIdURL}${id}`);
 
-export { fetchApi, getMealById };
+const getMealsByIndredient = (ingredient) => fetchApi(`${mealsByIngredientURL}${ingredient}`);
+
+const getMealsByName = (name) => fetchApi(`${mealsByNameURL}${name}`);
+
+const getMealsByFirstLetter = (firstLetter) => fetchApi(`${mealsByFirstLetterURL}${firstLetter}`);
+
+export { fetchApi, getMealById, getMealsByIndredient, getMealsByName, getMealsByFirstLetter };
