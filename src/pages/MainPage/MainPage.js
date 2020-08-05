@@ -20,6 +20,7 @@ const MainPage = ({ foodType }) => {
   const mealValues = { list: [...meals], key: 'Meal', title: 'Comidas' };
   const drinkValues = { list: [...drinks], key: 'Drink', title: 'Bebidas' };
   const foods = foodType === 'comidas' ? mealValues : drinkValues;
+  console.log(foods);
 
   return (
     <div>
@@ -30,11 +31,11 @@ const MainPage = ({ foodType }) => {
       <FoodsContainer>
         {foods.list.slice(0, 12).map((food, index) => (
           <FoodCard
-            key={`${foods[`id${foods.Key}`]} ${foods[`str${foods.Key}`]}`}
+            key={`${foods[`id${foods.key}`]} ${foods[`str${foods.key}`]}`}
             thumb={food[`str${foods.key}Thumb`]}
             str={food[`str${foods.key}`]}
             index={index}
-            id={food[`id${foods.Key}`]}
+            id={food[`id${foods.key}`]}
           />
         ))}
       </FoodsContainer>
