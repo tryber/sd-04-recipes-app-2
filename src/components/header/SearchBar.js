@@ -2,30 +2,29 @@ import React, { useState, useContext } from 'react';
 import { Context } from '../../context/Context';
 import { getMealsByIndredient, getMealsByName, getMealsByFirstLetter } from '../../services/api';
 
+const handler = (event, setFunt) => {
+  setFunt(event.target.value);
+};
+
+const filterMeals = (input, option, setFunc) => {
+  switch (option) {
+    case 'ingredient':
+      getMealsByIndredient(input).then(setFunc);
+      break;
+    case 'name':
+      getMealsByName(input).then(setFunc);
+      break;
+    case 'first-letter':
+      getMealsByFirstLetter(input).then(setFunc);
+      break;
+    default:
+  }
+};
+
 const SearchBar = () => {
   const [inputText, setInputText] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
-
   const { setMeals } = useContext(Context);
-
-  const filterMeals = (input, option) => {
-    switch (option) {
-      case 'ingredient':
-        getMealsByIndredient(input).then(setMeals);
-        break;
-      case 'name':
-        getMealsByName(input).then(setMeals);
-        break;
-      case 'first-letter':
-        getMealsByFirstLetter(input).then(setMeals);
-        break;
-      default:
-    }
-  };
-
-  const handler = (event, setFunt) => {
-    setFunt(event.target.value);
-  };
 
   const createInputRadio = (value, testid, name) => (
     <label htmlFor={value}>
@@ -55,7 +54,7 @@ const SearchBar = () => {
       <button
         data-testid="exec-search-btn"
         type="button"
-        onClick={() => filterMeals(inputText, selectedOption)}
+        onClick={() => filterMeals(inputText, selectedOption, setMeals)}
       >
         Search
       </button>
