@@ -2,7 +2,8 @@ import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   fetchApi,
-  categoriesURL,
+  mealsCategoriesURL,
+  drinksCategoriesURL,
   areasURL,
   ingredientsURL,
   initialMealsURL,
@@ -14,7 +15,8 @@ export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [mealsCategories, setMealsCategories] = useState([]);
+  const [drinksCategories, setDrinksCategories] = useState([]);
   const [areas, setAreas] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [meals, setMeals] = useState([]);
@@ -44,12 +46,13 @@ const ContextProvider = ({ children }) => {
   // };
 
   const getAllApis = async () => {
-    await getApi(categoriesURL, setCategories);
+    await getApi(mealsCategoriesURL, setMealsCategories);
+    await getApi(drinksCategoriesURL, setDrinksCategories);
     await getApi(areasURL, setAreas);
     await getApi(ingredientsURL, setIngredients);
-    // await getRandomMeals();
     await getApi(initialMealsURL, setMeals);
     await getApi(initialDrinksURL, setDrinks);
+    // await getRandomMeals();
     setLoading(false);
   };
 
@@ -60,7 +63,8 @@ const ContextProvider = ({ children }) => {
 
   const contextValue = {
     loading,
-    categories,
+    mealsCategories,
+    drinksCategories,
     areas,
     ingredients,
     meals,
@@ -68,6 +72,8 @@ const ContextProvider = ({ children }) => {
     drinks,
     setDrinks,
   };
+
+  console.log(drinksCategories);
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };

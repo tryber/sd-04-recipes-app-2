@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Context } from '../../context/Context';
-import { getFoodsByIndredient, getFoodsByName, getFoodsByFirstLetter } from '../../services/api';
+import { getFoodsByIngredient, getFoodsByName, getFoodsByFirstLetter } from '../../services/api';
 
 const handler = (event, setFunt) => {
   setFunt(event.target.value);
@@ -31,7 +31,7 @@ const filterFoods = (foodType, input, option, setFunc, setRedirect) => {
   }
   switch (option) {
     case 'ingredient':
-      getFoodsByIndredient(type, input).then((resp) => {
+      getFoodsByIngredient(type, input).then((resp) => {
         checkLength(type, resp, setRedirect, foodType);
         setFunc(resp);
       });

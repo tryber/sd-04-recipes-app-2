@@ -1,8 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { Context } from '../../context/Context';
+import {
+  fetchApi,
+  getFoodsByCategory,
+  initialMealsURL,
+  initialDrinksURL,
+} from '../../services/api';
 import { Header, FoodCard, BottomMenu } from '../../components';
 
 const FoodsContainer = styled.div`
@@ -14,19 +20,62 @@ const FoodsContainer = styled.div`
 `;
 
 const MainPage = ({ foodType }) => {
-  const { loading, categories, /* areas, ingredients, */ meals, drinks } = useContext(Context);
+  const [categoryFiltered, setCategoryFiltered] = useState(null);
+
+  const {
+    loading,
+    mealsCategories,
+    drinksCategories,
+    /* areas, ingredients, */ meals,
+    drinks,
+    setMeals,
+    setDrinks,
+  } = useContext(Context);
+
+  const mealValues = {
+    list: [...meals],
+    key: 'Meal',
+    title: 'Comidas',
+    categories: mealsCategories,
+    URL: 'meal',
+    setFunc: setMeals,
+    initialValuesURL: initialMealsURL,
+  };
+
+  const drinkValues = {
+    list: [...drinks],
+    key: 'Drink',
+    title: 'Bebidas',
+    categories: drinksCategories,
+    URL: 'cocktail',
+    setFunc: setDrinks,
+    initialValuesURL: initialDrinksURL,
+  };
+
+  const foods = foodType === 'comidas' ? mealValues : drinkValues;
+
+  const filterByCategory = (category) => {
+    if (category === categoryFiltered) {
+      setCategoryFiltered(null);
+      return fetchApi(foods.initialValuesURL).then(foods.setFunc);
+    }
+    setCategoryFiltered(category);
+    return getFoodsByCategory(foods.URL, category).then(foods.setFunc);
+  };
 
   if (loading) return <p>Loading...</p>;
-  const mealValues = { list: [...meals], key: 'Meal', title: 'Comidas' };
-  const drinkValues = { list: [...drinks], key: 'Drink', title: 'Bebidas' };
-  const foods = foodType === 'comidas' ? mealValues : drinkValues;
-  console.log(foods);
 
   return (
     <div>
       <Header pageTitle={foods.title} />
-      {categories.map(({ strCategory }) => (
-        <button type="button">{strCategory}</button>
+      {foods.categories.slice(0, 5).map(({ strCategory }) => (
+        <button
+          data-testid={`${strCategory}-category-filter`}
+          type="button"
+          onClick={() => filterByCategory(strCategory)}
+        >
+          {strCategory}
+        </button>
       ))}
       <FoodsContainer>
         {foods.list.slice(0, 12).map((food, index) => (
