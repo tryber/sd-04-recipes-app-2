@@ -68,6 +68,7 @@ const MainPage = ({ foodType }) => {
   return (
     <div>
       <Header pageTitle={foods.title} />
+      {!categoryFiltered && <div data-testid="All-category-filter" />}
       {foods.categories.slice(0, 5).map(({ strCategory }) => (
         <button
           data-testid={`${strCategory}-category-filter`}
