@@ -24,4 +24,5 @@ FoodCard.propTypes = {
   str: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
+  foodType: PropTypes.string.isRequired,
 };
