@@ -25,7 +25,7 @@ const RecipeDetails = ({
   if (loading) return <p>Loading...</p>;
   return (
     <div>
-      <img data-testid="recipe-photo" src={food[`str${key}Thumb`]} />
+      <img data-testid="recipe-photo" src={food[`str${key}Thumb`]} alt={food[`str${key}`]} />
       <h1 data-testid="recipe-title">{food[`str${key}`]}</h1>
     </div>
   );
