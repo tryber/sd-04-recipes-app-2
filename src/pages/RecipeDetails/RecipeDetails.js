@@ -14,7 +14,6 @@ const RecipeDetails = ({
   const key = path.includes('comidas') ? 'Meal' : 'Drink';
 
   useEffect(() => {
-    // console.log(type);
     getFoodById(type, id).then((resp) => {
       setFood(resp[0]);
       setLoading(false);
@@ -22,11 +21,27 @@ const RecipeDetails = ({
   }, []);
 
   console.log(food);
+
   if (loading) return <p>Loading...</p>;
+
+  const keys = Object.keys(food);
+
+  const ingredients = keys.filter((item) => {
+    console.log(typeof item);
+    item.includes('strIngredient');
+  });
+  console.log(ingredients);
+
   return (
     <div>
       <img data-testid="recipe-photo" src={food[`str${key}Thumb`]} alt={food[`str${key}`]} />
       <h1 data-testid="recipe-title">{food[`str${key}`]}</h1>
+      <h3 data-testid="recipe-category">{food.strCategory}</h3>
+      <button data-testid="share-btn">Icone twitter</button>
+      <button data-testid="favorite-btn">Favoritar</button>
+      <h3>Ingredients</h3>
+
+      {/* <p>{food[`strIngredient${}]}</p> */}
     </div>
   );
 };
