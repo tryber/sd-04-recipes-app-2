@@ -88,6 +88,7 @@ const MainPage = ({ foodType }) => {
             str={food[`str${foods.key}`]}
             index={index}
             id={food[`id${foods.key}`]}
+            foodType={foodType}
           />
         ))}
       </FoodsContainer>

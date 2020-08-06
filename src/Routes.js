@@ -14,8 +14,8 @@ const Routes = () => (
         <MainPage foodType="bebidas" />
       </Route>
       <Route path="/comidas/:id" component={RecipeDetails} />
+      <Route path="/bebidas/:id" component={RecipeDetails} />
       {/*
-        <Route exact path="/bebidas/:id" component={} />
         <Route exact path="/comidas/:id/in-progress" component={} />
         <Route exact path="/bebidas/:id/in-progress" component={} />
       */}
