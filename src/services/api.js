@@ -13,7 +13,9 @@ const fetchApi = async (URL) => {
     .then((responseJSON) => responseJSON[responseKey]);
 };
 
-const getMealById = (id) => fetchApi(`${mealByIdURL}${id}`);
+// const getMealById = (id) => fetchApi(`${mealByIdURL}${id}`);
+
+const getFoodById = (type, id) => fetchApi(`https://www.the${type}db.com/api/json/v1/1/lookup.php?i=${id}`);
 
 const getFoodsByIndredient = (type, ingredient) =>
   fetchApi(`https://www.the${type}db.com/api/json/v1/1/filter.php?i=${ingredient}`);
@@ -24,4 +26,4 @@ const getFoodsByName = (type, name) =>
 const getFoodsByFirstLetter = (type, firstLetter) =>
   fetchApi(`https://www.the${type}db.com/api/json/v1/1/search.php?f=${firstLetter}`);
 
-export { fetchApi, getMealById, getFoodsByIndredient, getFoodsByName, getFoodsByFirstLetter };
+export { fetchApi, getFoodById, getFoodsByIndredient, getFoodsByName, getFoodsByFirstLetter };

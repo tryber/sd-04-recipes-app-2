@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getMealById } from '../../services/api';
+import { getFoodById } from '../../services/api';
 
 const RecipeDetails = ({
   match: {
     params: { id },
+    path,
   },
 }) => {
-  const [meal, setMeal] = useState(null);
+  const [food, setFood] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const type = path.includes('comidas') ? 'meal' : 'cocktail';
+  const key = path.includes('comidas') ? 'Meal' : 'Drink';
+
   useEffect(() => {
-    getMealById(id).then(setMeal);
+    // console.log(type);
+    getFoodById(type, id).then((resp) => {
+      setFood(resp[0]);
+      setLoading(false);
+    });
   }, []);
 
-  console.log(meal);
-  return <div>Hello food. {id}</div>;
+  console.log(food);
+  if (loading) return <p>Loading...</p>;
+  return (
+    <div>
+      <img data-testid="recipe-photo" src={food[`str${key}Thumb`]} alt={food[`str${key}`]} />
+      <h1 data-testid="recipe-title">{food[`str${key}`]}</h1>
+    </div>
+  );
 };
 
 RecipeDetails.propTypes = {
