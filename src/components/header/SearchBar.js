@@ -4,8 +4,8 @@ import { Redirect } from 'react-router-dom';
 import { Context } from '../../context/Context';
 import { getFoodsByIngredient, getFoodsByName, getFoodsByFirstLetter } from '../../services/api';
 
-const handler = (event, setFunt) => {
-  setFunt(event.target.value);
+const handler = (event, setFunc) => {
+  setFunc(event.target.value);
 };
 
 const checkLength = (type, arr, setRedirect, foodType) => {
