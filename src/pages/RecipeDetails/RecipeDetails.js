@@ -9,14 +9,26 @@ const RecipeDetails = ({
   },
 }) => {
   const [food, setFood] = useState(null);
+  const [loading, setLoading] = useState(true);
   const type = path.includes('comidas') ? 'meal' : 'cocktail';
+  const key = path.includes('comidas') ? 'Meal' : 'Drink';
+
   useEffect(() => {
-    console.log(type);
-    getFoodById(type, id).then(setFood);
+    // console.log(type);
+    getFoodById(type, id).then((resp) => {
+      setFood(resp[0]);
+      setLoading(false);
+    });
   }, []);
 
   console.log(food);
-  return <div>Hello food. {id}</div>;
+  if (loading) return <p>Loading...</p>;
+  return (
+    <div>
+      <img data-testid="recipe-photo" src={food[`str${key}Thumb`]} />
+      <h1 data-testid="recipe-title">{food[`str${key}`]}</h1>
+    </div>
+  );
 };
 
 RecipeDetails.propTypes = {
