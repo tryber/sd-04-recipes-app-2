@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getMealById } from '../../services/api';
+import { getFoodById } from '../../services/api';
 
 const RecipeDetails = ({
   match: {
     params: { id },
+    path,
   },
 }) => {
-  const [meal, setMeal] = useState(null);
+  const [food, setFood] = useState(null);
+  const type = path.includes('comidas') ? 'meal' : 'cocktail';
   useEffect(() => {
-    getMealById(id).then(setMeal);
+    console.log(type);
+    getFoodById(type, id).then(setFood);
   }, []);
 
-  console.log(meal);
+  console.log(food);
   return <div>Hello food. {id}</div>;
 };
 
