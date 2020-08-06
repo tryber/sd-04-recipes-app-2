@@ -55,7 +55,7 @@ const MainPage = ({ foodType }) => {
   const foods = foodType === 'comidas' ? mealValues : drinkValues;
 
   const filterByCategory = (category) => {
-    if (category === categoryFiltered) {
+    if (category === categoryFiltered || !category) {
       setCategoryFiltered(null);
       return fetchApi(foods.initialValuesURL).then(foods.setFunc);
     }
@@ -68,7 +68,9 @@ const MainPage = ({ foodType }) => {
   return (
     <div>
       <Header pageTitle={foods.title} />
-      {!categoryFiltered && <div data-testid="All-category-filter" />}
+      <button data-testid="All-category-filter" type="button" onClick={() => filterByCategory()}>
+        All
+      </button>
       {foods.categories.slice(0, 5).map(({ strCategory }) => (
         <button
           data-testid={`${strCategory}-category-filter`}
