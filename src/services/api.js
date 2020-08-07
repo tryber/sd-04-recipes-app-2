@@ -14,7 +14,8 @@ export const fetchApi = async (URL) => {
     .then((responseJSON) => responseJSON[responseKey]);
 };
 
-export const getFoodById = (type, id) => fetchApi(`https://www.the${type}db.com/api/json/v1/1/lookup.php?i=${id}`);
+export const getFoodById = (type, id) =>
+  fetchApi(`https://www.the${type}db.com/api/json/v1/1/lookup.php?i=${id}`);
 
 export const getFoodsByIngredient = (type, ingredient) =>
   fetchApi(`https://www.the${type}db.com/api/json/v1/1/filter.php?i=${ingredient}`);
@@ -27,4 +28,3 @@ export const getFoodsByFirstLetter = (type, firstLetter) =>
 
 export const getFoodsByCategory = (type, category) =>
   fetchApi(`https://www.the${type}db.com/api/json/v1/1/filter.php?c=${category}`);
-

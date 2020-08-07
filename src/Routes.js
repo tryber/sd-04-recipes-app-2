@@ -13,12 +13,10 @@ const Routes = () => (
       <Route exact path="/bebidas">
         <MainPage foodType="bebidas" />
       </Route>
-      <Route path="/comidas/:id" component={RecipeDetails} />
-      <Route path="/bebidas/:id" component={RecipeDetails} />
-      {/*
-        <Route exact path="/comidas/:id/in-progress" component={} />
-        <Route exact path="/bebidas/:id/in-progress" component={} />
-      */}
+      <Route exact path="/comidas/:id" component={RecipeDetails} />
+      <Route exact path="/bebidas/:id" component={RecipeDetails} />
+      <Route exact path="/comidas/:id/in-progress" component={RecipeDetails} />
+      <Route exact path="/bebidas/:id/in-progress" component={RecipeDetails} />
       <Route exact path="/explorar" component={BottomMenu} />
       {/*
         <Route exact path="/explorar/comidas" component={} />
