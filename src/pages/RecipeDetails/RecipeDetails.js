@@ -40,12 +40,14 @@ const RecipeDetails = ({
       </button>
       <Ingredients food={food} path={path} />
       <Instructions instructions={food.strInstructions} />
-      {!inProgress && <Video key={key} food={food} />}
-      {!inProgress && <Recomendations type={type} />}
       {!inProgress && (
-        <Link to={`/${foodType}/${food[`id${key}`]}/in-progress`}>
-          <Button data-testid="start-recipe-btn">Start Recipe</Button>
-        </Link>
+        <div>
+          <Video key={key} food={food} />
+          <Recomendations type={type} />
+          <Link to={`/${foodType}/${food[`id${key}`]}/in-progress`}>
+            <Button data-testid="start-recipe-btn">Start Recipe</Button>
+          </Link>
+        </div>
       )}
       {inProgress && (
         <Link to="/receitas-feitas">
