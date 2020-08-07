@@ -28,7 +28,7 @@ const RecipeDetails = ({
 
   const ingredients = keys.filter((item) => {
     console.log(typeof item);
-    item.includes('strIngredient');
+    return item.includes('strIngredient');
   });
   console.log(ingredients);
 
