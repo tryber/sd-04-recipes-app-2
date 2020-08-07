@@ -26,7 +26,6 @@ const RecipeDetails = ({
   }, []);
 
   if (loading) return <p>Loading...</p>;
-
   return (
     <div>
       <img data-testid="recipe-photo" src={food[`str${key}Thumb`]} alt={food[`str${key}`]} />
@@ -42,7 +41,7 @@ const RecipeDetails = ({
       <Instructions instructions={food.strInstructions} />
       {!inProgress && (
         <div>
-          <Video key={key} food={food} />
+          <Video path={path} food={food} />
           <Recomendations type={type} />
           <Link to={`/${foodType}/${food[`id${key}`]}/in-progress`}>
             <Button data-testid="start-recipe-btn">Start Recipe</Button>
