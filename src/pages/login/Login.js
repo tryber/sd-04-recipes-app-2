@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LoginContainer from './styles';
-import CoverPic from '../../images/cover-pic.jpeg';
+// import CoverPic from '../../images/cover-pic.jpeg';
 
 const handleValue = (event, setFunction) => {
   setFunction(event.target.value);
@@ -33,36 +33,37 @@ const Login = () => {
 
   return (
     <LoginContainer>
-      <LoginContainer.Img src={CoverPic} />
-      <LoginContainer.H1>{"Let's start cooking!"}</LoginContainer.H1>
-      <LoginContainer.Input
-        data-testid="email-input"
-        type="email"
-        placeholder="Email"
-        onChange={(event) => {
-          handleValue(event, setEmail);
-          validateInputs(email, password, setDisabled);
-        }}
-      />
-      <LoginContainer.Input
-        data-testid="password-input"
-        type="password"
-        placeholder="Password"
-        onChange={(event) => {
-          handleValue(event, setPassword);
-          validateInputs(email, password, setDisabled);
-        }}
-      />
-      <LoginContainer.Link to="/comidas">
-        <LoginContainer.Button
-          data-testid="login-submit-btn"
-          type="button"
-          disabled={disabled}
-          onClick={() => setLocalStorage(email)}
-        >
-          Log in
-        </LoginContainer.Button>
-      </LoginContainer.Link>
+      <LoginContainer.Aside>
+        <LoginContainer.H1>{"Let's start cooking!"}</LoginContainer.H1>
+        <LoginContainer.Input
+          data-testid="email-input"
+          type="email"
+          placeholder="Email"
+          onChange={(event) => {
+            handleValue(event, setEmail);
+            validateInputs(email, password, setDisabled);
+          }}
+        />
+        <LoginContainer.Input
+          data-testid="password-input"
+          type="password"
+          placeholder="Password"
+          onChange={(event) => {
+            handleValue(event, setPassword);
+            validateInputs(email, password, setDisabled);
+          }}
+        />
+        <LoginContainer.Link to="/comidas">
+          <LoginContainer.Button
+            data-testid="login-submit-btn"
+            type="button"
+            disabled={disabled}
+            onClick={() => setLocalStorage(email)}
+          >
+            Log in
+          </LoginContainer.Button>
+        </LoginContainer.Link>
+      </LoginContainer.Aside>
     </LoginContainer>
   );
 };
