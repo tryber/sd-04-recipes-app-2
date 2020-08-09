@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import AppContainer from '../../styledComponents/appContainer/styles';
-import H1 from '../../styledComponents/h1/styles';
-import Input from '../../styledComponents/input/styles';
-import Button from '../../styledComponents/button/styles';
+import AppContainer from '../../styledComponents/AppContainer/styles';
+import H1 from '../../styledComponents/H1/styles';
+import Input from '../../styledComponents/Input/styles';
+import Button from '../../styledComponents/Button/styles';
 
 const LoginContainer = styled(AppContainer)`
   align-items: center;

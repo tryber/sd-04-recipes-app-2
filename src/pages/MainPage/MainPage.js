@@ -9,7 +9,7 @@ import {
   // initialMealsURL,
   // initialDrinksURL,
 } from '../../services/api';
-import { Header, FoodCard, BottomMenu } from '../../components';
+import { Loading, Header, FoodCard, BottomMenu } from '../../components';
 
 const FoodsContainer = styled.div`
   width: 100vw;
@@ -68,7 +68,7 @@ const MainPage = ({ match: { path } }) => {
     return getFoodsByCategory(foods.URL, category).then(foods.setFunc);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
 
   return (
     <div>

@@ -1,9 +1,15 @@
-import React, { useState, useEffect /* , useContext */ } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import { Context } from '../../context/Context';
-import { Ingredients, Instructions, Video, Recomendations, Category } from '../../components';
-import Button from '../../styledComponents/button/styles';
+import {
+  Loading,
+  Ingredients,
+  Instructions,
+  Video,
+  Recomendations,
+  Category,
+} from '../../components';
+import Button from '../../styledComponents/Button/styles';
 import { getFoodById } from '../../services/api';
 
 const RecipeDetails = ({
@@ -12,21 +18,15 @@ const RecipeDetails = ({
     path,
   },
 }) => {
-  // const {
-  // } = useContext(Context);
-
   const [loading, setLoading] = useState(true);
-  const type = path.includes('comidas') ? 'meal' : 'cocktail';
-  const inProgress = path.includes('in-progress');
-  // const key = path.includes('comidas') ? 'Meal' : 'Drink';
-  // const foodType = path.includes('comidas') ? 'comidas' : 'bebidas';
   const [meal, setMeal] = useState({});
   const [drink, setDrink] = useState({});
-
   const [mealValue, setMealValue] = useState({});
   const [drinkValue, setDrinkValue] = useState({});
 
+  const type = path.includes('comidas') ? 'meal' : 'cocktail';
   const food = path.includes('comidas') ? mealValue : drinkValue;
+  const inProgress = path.includes('in-progress');
 
   useEffect(() => {
     getFoodById(type, id).then((resp) => {
@@ -39,23 +39,11 @@ const RecipeDetails = ({
   }, []);
 
   useEffect(() => {
-    setMealValue({
-      item: meal,
-      key: 'Meal',
-      title: 'Comidas',
-      URL: 'meal',
-      path: 'comidas',
-    });
-    setDrinkValue({
-      item: drink,
-      key: 'Drink',
-      title: 'Bebidas',
-      URL: 'cocktail',
-      path: 'bebidas',
-    });
+    setMealValue({ item: meal, key: 'Meal', path: 'comidas' });
+    setDrinkValue({ item: drink, key: 'Drink', path: 'bebidas' });
   }, [meal, drink]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
 
   return (
     <div>
