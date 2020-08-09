@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState /* , useEffect */ } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -31,8 +31,8 @@ const MainPage = ({ match: { path } }) => {
     // drinks,
     // setMeals,
     // setDrinks,
-    foods,
-    setFoods,
+    // foods,
+    // setFoods,
     mealValues,
     drinkValues,
   } = useContext(Context);
@@ -57,13 +57,13 @@ const MainPage = ({ match: { path } }) => {
   //   initialValuesURL: initialDrinksURL,
   // };
 
-  // foods = foodType === 'comidas' ? mealValues : drinkValues;
+  const foods = path.includes('comidas') ? mealValues : drinkValues;
 
-  const checkPath = () => (path.includes('comidas') ? setFoods(mealValues) : setFoods(drinkValues));
+  // const checkPath = () => (path.includes('comidas') ? setFoods(mealValues) : setFoods(drinkValues));
 
-  useEffect(() => {
-    checkPath();
-  }, [mealValues, drinkValues]);
+  // useEffect(() => {
+  //   checkPath();
+  // }, [mealValues, drinkValues]);
 
   const filterByCategory = (category) => {
     if (category === categoryFiltered || !category) {
