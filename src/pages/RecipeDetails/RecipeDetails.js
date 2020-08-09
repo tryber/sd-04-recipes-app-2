@@ -13,14 +13,8 @@ const RecipeDetails = ({
   },
 }) => {
   // const {
-  //   setFoods,
-  //   mealValues,
-  //   drinkValues,
-  //   meals,
-  //   setMeals,
   // } = useContext(Context);
 
-  const [food, setFood] = useState(null);
   const [loading, setLoading] = useState(true);
   const type = path.includes('comidas') ? 'meal' : 'cocktail';
   const inProgress = path.includes('in-progress');
@@ -32,11 +26,14 @@ const RecipeDetails = ({
   const [mealValue, setMealValue] = useState({});
   const [drinkValue, setDrinkValue] = useState({});
 
-  // const food = path.includes('comidas') ? mealValue : drinkValue;
+  const food = path.includes('comidas') ? mealValue : drinkValue;
 
   useEffect(() => {
     getFoodById(type, id).then((resp) => {
-      type === 'meal' ? setMeal(resp[0]) : setDrink(resp[0]);
+      if (type === 'meal') {
+        setMeal(resp[0]);
+      }
+      setDrink(resp[0]);
       setLoading(false);
     });
   }, []);
@@ -57,11 +54,6 @@ const RecipeDetails = ({
       path: 'bebidas',
     });
   }, [meal, drink]);
-
-  const checkPath = () => (path.includes('comidas') ? setFood(mealValue) : setFood(drinkValue));
-  useEffect(() => {
-    checkPath();
-  }, [mealValue, drinkValue]);
 
   if (loading) return <p>Loading...</p>;
 

@@ -59,12 +59,6 @@ const MainPage = ({ match: { path } }) => {
 
   const foods = path.includes('comidas') ? mealValues : drinkValues;
 
-  // const checkPath = () => (path.includes('comidas') ? setFoods(mealValues) : setFoods(drinkValues));
-
-  // useEffect(() => {
-  //   checkPath();
-  // }, [mealValues, drinkValues]);
-
   const filterByCategory = (category) => {
     if (category === categoryFiltered || !category) {
       setCategoryFiltered(null);

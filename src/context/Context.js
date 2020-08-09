@@ -22,7 +22,6 @@ const ContextProvider = ({ children }) => {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
 
-  // const [foods, setFoods] = useState([]);
   const [mealValues, setMealValues] = useState({});
   const [drinkValues, setDrinkValues] = useState({});
 
@@ -98,8 +97,6 @@ const ContextProvider = ({ children }) => {
     setMeals,
     drinks,
     setDrinks,
-    // foods,
-    // setFoods,
     mealValues,
     drinkValues,
   };
