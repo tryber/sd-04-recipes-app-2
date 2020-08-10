@@ -19,7 +19,7 @@ const ExploreFood = ({ match: { path } }) => {
     });
   }, []);
 
-  console.log(food);
+  // console.log(food);
   if (loading) return <Loading />;
   return (
     <div>
