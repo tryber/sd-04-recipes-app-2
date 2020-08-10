@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Login, MainPage, RecipeDetails, RecipesMade } from './pages';
+import { Login, MainPage, RecipeDetails, DoneRecipes } from './pages';
 import { BottomMenu } from './components';
 
 const Routes = () => (
@@ -22,7 +22,7 @@ const Routes = () => (
         <Route exact path="/explorar/comidas/area" component={} />
         <Route exact path="/perfil" component={} /> */}
 
-      <Route exact path="/receitas-feitas" component={RecipesMade} />
+      <Route exact path="/receitas-feitas" component={DoneRecipes} />
       {/* <Route exact path="/receitas-favoritas" component={} /> */}
     </Switch>
   </BrowserRouter>
