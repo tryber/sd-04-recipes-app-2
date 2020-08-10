@@ -16,7 +16,7 @@ const Routes = () => (
       <Route exact path="/explorar" component={Explore} />
       <Route exact path="/explorar/comidas" component={BottomMenu} />
       <Route exact path="/explorar/bebidas" component={BottomMenu} />
-      {/*  
+      {/*
         <Route exact path="/explorar/comidas/ingredientes" component={} />
         <Route exact path="/explorar/bebidas/ingredientes" component={} />
         <Route exact path="/explorar/comidas/area" component={} />
