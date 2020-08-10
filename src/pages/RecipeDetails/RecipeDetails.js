@@ -19,11 +19,7 @@ const RecipeDetails = ({
     path,
   },
 }) => {
-  const type = path.includes('comidas') ? 'meal' : 'cocktail';
-  const inProgress = path.includes('in-progress');
-
-  const { loading, mealValue, drinkValue, isInProgress } = useFoodDetails(type, id);
-  const food = path.includes('comidas') ? mealValue : drinkValue;
+  const { loading, food, inProgress, isInProgress } = useFoodDetails(path, id);
 
   if (loading) return <Loading />;
 
