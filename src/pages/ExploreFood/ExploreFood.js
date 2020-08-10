@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 import { Link } from 'react-router-dom';
 import { BottomMenu, Header, Loading } from '../../components';
 import { getFoodByRandom } from '../../services/api';
@@ -43,6 +44,6 @@ export default ExploreFood;
 
 ExploreFood.propTypes = {
   match: PropTypes.shape({
-    path: PropTypes.string.isRequired,
-  }).isRequired,
+    path: PropTypes.string.isRequired
+  }).isRequired
 };
