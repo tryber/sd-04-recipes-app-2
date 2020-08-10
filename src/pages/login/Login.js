@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import LoginContainer from './styles';
-// import CoverPic from '../../images/cover-pic.jpeg';
 
 const handleValue = (event, setFunction) => {
   setFunction(event.target.value);

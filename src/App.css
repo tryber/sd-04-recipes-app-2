@@ -70,9 +70,10 @@
   --black: #000000;
   --grayHeavy: #494848;
   --grayMedium: #f4f3f3;
-  /* --primary: #3D918F; */
+  --primary: #3D918F;
   /* --primary: #6D3E50; */
-  --primary: #31540B;
+  /* --primary: #31540B; */
+  /* --background: rgb(49, 84, 11, 0.5); */
   --white: #ffffff;
 }
 
