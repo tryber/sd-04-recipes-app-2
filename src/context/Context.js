@@ -73,8 +73,6 @@ const ContextProvider = ({ children }) => {
     setDrinks,
   };
 
-  console.log(drinksCategories);
-
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
 

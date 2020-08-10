@@ -1,13 +1,18 @@
 import React from 'react';
-import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
-// test utils file
-export default function renderWithRouter(
+import ContextProvider from '../context/Context';
+
+const renderWithRouterAndContext = (
   ui,
   { route = '/', history = createMemoryHistory({ initialEntries: [route] }) } = {},
-) {
-  const Wrapper = ({ children }) => <Router history={history}>{children}</Router>;
+) => {
+  const Wrapper = ({ children }) => (
+    <Router history={history}>
+      <ContextProvider>{children}</ContextProvider>
+    </Router>
+  );
   return {
     ...render(ui, { wrapper: Wrapper }),
     // adding `history` to the returned utilities to allow us
@@ -15,4 +20,6 @@ export default function renderWithRouter(
     // this to test implementation details).
     history,
   };
-}
+};
+
+export default renderWithRouterAndContext;
