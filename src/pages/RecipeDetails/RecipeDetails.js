@@ -51,6 +51,7 @@ const RecipeDetails = ({
         data-testid="recipe-photo"
         src={food.item[`str${food.key}Thumb`]}
         alt={food[`str${food.key}`]}
+        style={{ width: '30vw' }}
       />
       <h1 data-testid="recipe-title">{food.item[`str${food.key}`]}</h1>
       <Category food={food.item} type={type} />
@@ -67,13 +68,13 @@ const RecipeDetails = ({
           {food.item.strYoutube && <Video path={path} food={food.item} />}
           <Recomendations type={type} />
           <Link to={`/${food.path}/${food.item[`id${food.key}`]}/in-progress`}>
-            <Button data-testid="start-recipe-btn">Start Recipe</Button>
+            <Button.fixed data-testid="start-recipe-btn">Start Recipe</Button.fixed>
           </Link>
         </div>
       )}
       {inProgress && (
         <Link to="/receitas-feitas">
-          <Button data-testid="finish-recipe-btn">Finish Recipe</Button>
+          <Button.fixed data-testid="finish-recipe-btn">Finish Recipe</Button.fixed>
         </Link>
       )}
     </div>
