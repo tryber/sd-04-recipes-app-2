@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState /* , useEffect */ } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -6,10 +6,10 @@ import { Context } from '../../context/Context';
 import {
   fetchApi,
   getFoodsByCategory,
-  initialMealsURL,
-  initialDrinksURL,
+  // initialMealsURL,
+  // initialDrinksURL,
 } from '../../services/api';
-import { Header, FoodCard, BottomMenu } from '../../components';
+import { Loading, Header, FoodCard, BottomMenu } from '../../components';
 
 const FoodsContainer = styled.div`
   width: 100vw;
@@ -19,40 +19,45 @@ const FoodsContainer = styled.div`
   justify-content: space-around;
 `;
 
-const MainPage = ({ foodType }) => {
+const MainPage = ({ match: { path } }) => {
   const [categoryFiltered, setCategoryFiltered] = useState(null);
 
   const {
     loading,
-    mealsCategories,
-    drinksCategories,
-    /* areas, ingredients, */ meals,
-    drinks,
-    setMeals,
-    setDrinks,
+    // mealsCategories,
+    // drinksCategories,
+    // areas, ingredients,
+    // meals,
+    // drinks,
+    // setMeals,
+    // setDrinks,
+    // foods,
+    // setFoods,
+    mealValues,
+    drinkValues,
   } = useContext(Context);
 
-  const mealValues = {
-    list: [...meals],
-    key: 'Meal',
-    title: 'Comidas',
-    categories: mealsCategories,
-    URL: 'meal',
-    setFunc: setMeals,
-    initialValuesURL: initialMealsURL,
-  };
+  // const mealValues = {
+  //   list: [...meals],
+  //   key: 'Meal',
+  //   title: 'Comidas',
+  //   categories: mealsCategories,
+  //   URL: 'meal',
+  //   setFunc: setMeals,
+  //   initialValuesURL: initialMealsURL,
+  // };
 
-  const drinkValues = {
-    list: [...drinks],
-    key: 'Drink',
-    title: 'Bebidas',
-    categories: drinksCategories,
-    URL: 'cocktail',
-    setFunc: setDrinks,
-    initialValuesURL: initialDrinksURL,
-  };
+  // const drinkValues = {
+  //   list: [...drinks],
+  //   key: 'Drink',
+  //   title: 'Bebidas',
+  //   categories: drinksCategories,
+  //   URL: 'cocktail',
+  //   setFunc: setDrinks,
+  //   initialValuesURL: initialDrinksURL,
+  // };
 
-  const foods = foodType === 'comidas' ? mealValues : drinkValues;
+  const foods = path.includes('comidas') ? mealValues : drinkValues;
 
   const filterByCategory = (category) => {
     if (category === categoryFiltered || !category) {
@@ -63,7 +68,7 @@ const MainPage = ({ foodType }) => {
     return getFoodsByCategory(foods.URL, category).then(foods.setFunc);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
 
   return (
     <div>
@@ -88,7 +93,7 @@ const MainPage = ({ foodType }) => {
             str={food[`str${foods.key}`]}
             index={index}
             id={food[`id${foods.key}`]}
-            foodType={foodType}
+            foodType={foods.path}
           />
         ))}
       </FoodsContainer>
@@ -100,5 +105,7 @@ const MainPage = ({ foodType }) => {
 export default MainPage;
 
 MainPage.propTypes = {
-  foodType: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
 };

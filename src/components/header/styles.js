@@ -15,21 +15,22 @@ HeaderContainer.DefaultHeader = styled.div`
   height: 10vh;
   justify-content: space-between;
   padding: 10px 20px;
+  border-radius: 0 0 30px 30px;
 `;
 
 HeaderContainer.UserLink = styled(Link)`
-  background-color: var(--primary);
   border: 0;
   cursor: pointer;
   height: 90%;
 `;
 
 HeaderContainer.Title = styled.h1`
-  color: var(--black);
+  color: var(--white);
+  letter-spacing: 5px;
 `;
 
 HeaderContainer.SearchButton = styled.button`
-  background-color: var(--primary);
+  background-color: transparent;
   border: 0;
   cursor: pointer;
   height: 90%;

@@ -63,13 +63,17 @@
 
 * {
   box-sizing: border-box;
+  /* border: 1px solid red; */
 }
 
 :root {
   --black: #000000;
   --grayHeavy: #494848;
   --grayMedium: #f4f3f3;
-  --primary: #b3a485;
+  --primary: #3D918F;
+  /* --primary: #6D3E50; */
+  /* --primary: #31540B; */
+  /* --background: rgb(49, 84, 11, 0.5); */
   --white: #ffffff;
 }
 

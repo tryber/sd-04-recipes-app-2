@@ -14,7 +14,7 @@ import {
 export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [mealsCategories, setMealsCategories] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
   const [areas, setAreas] = useState([]);
@@ -22,12 +22,15 @@ const ContextProvider = ({ children }) => {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
 
+  const [mealValues, setMealValues] = useState({});
+  const [drinkValues, setDrinkValues] = useState({});
+
   const handleSuccess = (response, callback) => callback(response);
 
   const handleFailure = (error) => console.error(error.message);
 
   const getApi = async (URL, callback) => {
-    if (loading) return null;
+    if (!loading) return null;
     setLoading(true);
     return fetchApi(URL).then((response) => handleSuccess(response, callback), handleFailure);
   };
@@ -61,6 +64,29 @@ const ContextProvider = ({ children }) => {
     getAllApis();
   }, []);
 
+  useEffect(() => {
+    setMealValues({
+      list: [...meals],
+      key: 'Meal',
+      title: 'Comidas',
+      categories: mealsCategories,
+      URL: 'meal',
+      path: 'comidas',
+      setFunc: setMeals,
+      initialValuesURL: initialMealsURL,
+    });
+    setDrinkValues({
+      list: [...drinks],
+      key: 'Drink',
+      title: 'Bebidas',
+      categories: drinksCategories,
+      URL: 'cocktail',
+      path: 'bebidas',
+      setFunc: setDrinks,
+      initialValuesURL: initialDrinksURL,
+    });
+  }, [meals, drinks]);
+
   const contextValue = {
     loading,
     mealsCategories,
@@ -71,9 +97,9 @@ const ContextProvider = ({ children }) => {
     setMeals,
     drinks,
     setDrinks,
+    mealValues,
+    drinkValues,
   };
-
-  console.log(drinksCategories);
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
