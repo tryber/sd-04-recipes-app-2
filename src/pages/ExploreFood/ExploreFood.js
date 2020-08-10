@@ -19,7 +19,7 @@ const ExploreFood = ({ match: { path } }) => {
   }, []);
 
   console.log(food);
-  if(loading) return <Loading />
+  if (loading) return <Loading />;
   return (
     <div>
       <Header pageTitle="Explorar" />
@@ -40,3 +40,9 @@ const ExploreFood = ({ match: { path } }) => {
 };
 
 export default ExploreFood;
+
+ExploreFood.propTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+};

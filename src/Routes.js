@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Login, MainPage, RecipeDetails, Explore, ExploreFood } from './pages';
-import { BottomMenu } from './components';
 
 const Routes = () => (
   <BrowserRouter>
