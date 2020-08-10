@@ -19,7 +19,7 @@ const RecipeDetails = ({
     path,
   },
 }) => {
-  const { loading, food, inProgress, isInProgress } = useFoodDetails(path, id);
+  const { type, loading, food, inProgress, isInProgress } = useFoodDetails(path, id);
 
   if (loading) return <Loading />;
 
