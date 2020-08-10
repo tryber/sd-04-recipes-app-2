@@ -7,6 +7,7 @@ import SearchIcon from '../../images/searchIcon.svg';
 
 const Header = ({ pageTitle }) => {
   const [displaySearchBar, setDisplaySearchBar] = useState(false);
+  const title = pageTitle === 'Comidas' || pageTitle === 'Bebidas';
 
   return (
     <HeaderContainer>
@@ -15,12 +16,14 @@ const Header = ({ pageTitle }) => {
           <img src={ProfileIcon} alt="Profile icon" />
         </HeaderContainer.UserLink>
         <HeaderContainer.Title data-testid="page-title">{pageTitle}</HeaderContainer.Title>
-        <HeaderContainer.SearchButton
-          data-testid="search-top-btn"
-          onClick={() => setDisplaySearchBar(!displaySearchBar)}
-        >
-          <img src={SearchIcon} alt="Search icon" />
-        </HeaderContainer.SearchButton>
+        {title && (
+          <HeaderContainer.SearchButton
+            data-testid="search-top-btn"
+            onClick={() => setDisplaySearchBar(!displaySearchBar)}
+          >
+            <img src={SearchIcon} alt="Search icon" />
+          </HeaderContainer.SearchButton>
+        )}
       </HeaderContainer.DefaultHeader>
       {displaySearchBar && <SearchBar foodType={pageTitle} />}
     </HeaderContainer>
