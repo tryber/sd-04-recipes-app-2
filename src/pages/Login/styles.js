@@ -15,7 +15,7 @@ const LoginContainer = styled(AppContainer)`
 `;
 
 LoginContainer.Aside = styled.aside`
-  background-color: rgb(255, 255, 255, 0.6);
+  background-color: rgb(255,255,255, 0.6);
   width: 35vw;
   height: 60vh;
   display: flex;
@@ -26,7 +26,7 @@ LoginContainer.Aside = styled.aside`
   border-radius: 10px;
 
   @media (max-width: 800px) {
-    background-color: rgb(255, 255, 255, 0.9);
+    background-color: rgb(255,255,255, 0.9);
     left: 0;
     width: 80vw;
     height: 70vh;
@@ -36,7 +36,8 @@ LoginContainer.Aside = styled.aside`
 
 LoginContainer.H1 = styled(H1)``;
 
-LoginContainer.Input = styled(Input)``;
+LoginContainer.Input = styled(Input)`
+`;
 
 LoginContainer.Link = styled(Link)`
   width: 60%;

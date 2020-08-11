@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { getFoodsByName } from '../../services/api';
 
 const RecContainer = styled.div`
-  overflow: hidden;
   width: 100vw;
   height: fit-content;
 `;
+
 RecContainer.Carousel = styled.div`
   display: flex;
 `;
@@ -17,7 +17,12 @@ RecContainer.RecCard = styled.div`
 `;
 
 RecContainer.Img = styled.img`
-  width: 50vw;
+  width: 40vw;
+  padding: 10%;
+`;
+
+RecContainer.InvisibleImg = styled.img`
+  visibility: hidden;
 `;
 
 const Recomendations = ({ type }) => {
@@ -36,19 +41,35 @@ const Recomendations = ({ type }) => {
   if (loading) return <p>Loading...</p>;
   return (
     <div>
-      <h3>Recomendations</h3>
+      <h3>Recommendations</h3>
       <RecContainer>
         <RecContainer.Carousel>
-          {recomendations.slice(0, 6).map((recomendation, index) => (
-            <RecContainer.RecCard>
-              <RecContainer.Img
-                data-testid={`${index}-recomendation-card`}
-                src={recomendation[`str${recKey}Thumb`]}
-                alt={recomendation[`str${recKey}`]}
-              />
-              <p data-testid={`${index}-recomendation-title`}>{recomendation[`str${recKey}`]}</p>
-            </RecContainer.RecCard>
-          ))}
+          {recomendations.slice(0, 6).map((recomendation, index) => {
+            if (index <= 1) {
+              return (
+                <RecContainer.RecCard key={recomendation[`str${recKey}`]}>
+                  <RecContainer.Img
+                    data-testid={`${index}-recomendation-card`}
+                    src={recomendation[`str${recKey}Thumb`]}
+                    alt={recomendation[`str${recKey}`]}
+                  />
+                  <p data-testid={`${index}-recomendation-title`}>
+                    {recomendation[`str${recKey}`]}
+                  </p>
+                </RecContainer.RecCard>
+              );
+            }
+            return (
+              <RecContainer.RecCard>
+                <RecContainer.InvisibleImg
+                  data-testid={`${index}-recomendation-card`}
+                  src={recomendation[`str${recKey}Thumb`]}
+                  alt={recomendation[`str${recKey}`]}
+                />
+                <p data-testid={`${index}-recomendation-title`}>{recomendation[`str${recKey}`]}</p>
+              </RecContainer.RecCard>
+            );
+          })}
         </RecContainer.Carousel>
       </RecContainer>
     </div>

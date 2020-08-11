@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
@@ -9,8 +9,9 @@ import {
   Recomendations,
   Category,
 } from '../../components';
+import addToInProgressRecipes from '../../helpers/addToInProgressRecipes';
+import useFoodDetails from '../../hooks/useFoodDetails';
 import Button from '../../styledComponents/Button/styles';
-import { getFoodById } from '../../services/api';
 
 const RecipeDetails = ({
   match: {
@@ -18,30 +19,7 @@ const RecipeDetails = ({
     path,
   },
 }) => {
-  const [loading, setLoading] = useState(true);
-  const [meal, setMeal] = useState({});
-  const [drink, setDrink] = useState({});
-  const [mealValue, setMealValue] = useState({});
-  const [drinkValue, setDrinkValue] = useState({});
-
-  const type = path.includes('comidas') ? 'meal' : 'cocktail';
-  const food = path.includes('comidas') ? mealValue : drinkValue;
-  const inProgress = path.includes('in-progress');
-
-  useEffect(() => {
-    getFoodById(type, id).then((resp) => {
-      if (type === 'meal') {
-        setMeal(resp[0]);
-      }
-      setDrink(resp[0]);
-      setLoading(false);
-    });
-  }, []);
-
-  useEffect(() => {
-    setMealValue({ item: meal, key: 'Meal', path: 'comidas' });
-    setDrinkValue({ item: drink, key: 'Drink', path: 'bebidas' });
-  }, [meal, drink]);
+  const { type, loading, food, inProgress, isInProgress } = useFoodDetails(path, id);
 
   if (loading) return <Loading />;
 
@@ -51,6 +29,7 @@ const RecipeDetails = ({
         data-testid="recipe-photo"
         src={food.item[`str${food.key}Thumb`]}
         alt={food[`str${food.key}`]}
+        style={{ width: '30vw' }}
       />
       <h1 data-testid="recipe-title">{food.item[`str${food.key}`]}</h1>
       <Category food={food.item} type={type} />
@@ -67,13 +46,18 @@ const RecipeDetails = ({
           {food.item.strYoutube && <Video path={path} food={food.item} />}
           <Recomendations type={type} />
           <Link to={`/${food.path}/${food.item[`id${food.key}`]}/in-progress`}>
-            <Button data-testid="start-recipe-btn">Start Recipe</Button>
+            <Button.fixed
+              data-testid="start-recipe-btn"
+              onClick={() => addToInProgressRecipes(food, type, isInProgress)}
+            >
+              {isInProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+            </Button.fixed>
           </Link>
         </div>
       )}
       {inProgress && (
         <Link to="/receitas-feitas">
-          <Button data-testid="finish-recipe-btn">Finish Recipe</Button>
+          <Button.fixed data-testid="finish-recipe-btn">Finish Recipe</Button.fixed>
         </Link>
       )}
     </div>
@@ -82,7 +66,7 @@ const RecipeDetails = ({
 
 RecipeDetails.propTypes = {
   match: PropTypes.shape({
-    params: PropTypes.shape({ id: PropTypes.number }),
+    params: PropTypes.shape({ id: PropTypes.string }),
     path: PropTypes.string.isRequired,
   }).isRequired,
 };
