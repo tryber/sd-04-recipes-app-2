@@ -10,8 +10,10 @@ import {
   Category,
 } from '../../components';
 import addToInProgressRecipes from '../../helpers/addToInProgressRecipes';
+import addToFavoriteRecipes from '../../helpers/addToFavoriteRecipes';
 import copyToClipboard from '../../helpers/copyToClipboard';
 import ShareBtn from '../../images/shareIcon.svg';
+import heartIcon from '../../images/whiteHeartIcon.svg';
 import useFoodDetails from '../../hooks/useFoodDetails';
 import Button from '../../styledComponents/Button/styles';
 
@@ -21,7 +23,7 @@ const RecipeDetails = ({
     path,
   },
 }) => {
-  const { type, loading, food, inProgress, isInProgress } = useFoodDetails(path, id);
+  const { type, loading, food, inProgress, isInProgress, isFavorite } = useFoodDetails(path, id);
 
   if (loading) return <Loading />;
 
@@ -34,16 +36,16 @@ const RecipeDetails = ({
         style={{ width: '30vw' }}
       />
       <h1 data-testid="recipe-title">{food.item[`str${food.key}`]}</h1>
-      <button data-testid="share-btn" type="button" onClick={() => copyToClipboard(type, id)}>
+      <button data-testid="share-btn" type="button" onClick={() => copyToClipboard(food.path, id)}>
         <img src={ShareBtn} alt="share-btn" />
       </button>
+      <button
+        data-testid="favorite-btn"
+        type="button"
+        onClick={() => addToFavoriteRecipes(food, isFavorite)}
+        src={heartIcon}
+      />
       <Category food={food.item} type={type} />
-      <button type="button" data-testid="share-btn">
-        Icone twitter
-      </button>
-      <button type="button" data-testid="favorite-btn">
-        Favoritar
-      </button>
       <Ingredients food={food.item} path={path} />
       <Instructions instructions={food.item.strInstructions} />
       {!inProgress && (

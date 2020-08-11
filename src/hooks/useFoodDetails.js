@@ -7,6 +7,7 @@ const useFoodDetails = (path, id) => {
   const [drink, setDrink] = useState({});
   const [drinkValue, setDrinkValue] = useState({});
   const [isInProgress, setIsInProgress] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const type = path.includes('comidas') ? 'meal' : 'cocktail';
@@ -22,16 +23,27 @@ const useFoodDetails = (path, id) => {
         setDrink(resp[0]);
       }
       setLoading(false);
-      if (localStorage.inProgressRecipes) {
-        const foodIsInProgress = Object.keys(
-          JSON.parse(localStorage.inProgressRecipes)[`${type}s`],
-        ).includes(resp[0][`id${key}`]);
-        setIsInProgress(foodIsInProgress);
-      } else {
-        localStorage.inProgressRecipes = JSON.stringify({ cocktails: {}, meals: {} });
-      }
     });
   }, []);
+
+  useEffect(() => {
+    if (localStorage.inProgressRecipes) {
+      const foodIsInProgress = Object.keys(
+        JSON.parse(localStorage.inProgressRecipes)[`${type}s`],
+      ).includes(id);
+      setIsInProgress(foodIsInProgress);
+    } else {
+      localStorage.inProgressRecipes = JSON.stringify({ cocktails: {}, meals: {} });
+    }
+    if (localStorage.favoriteRecipes) {
+      const foodIsFavorite = JSON.parse(localStorage.favoriteRecipes).some(
+        (recipe) => recipe.id === id,
+      );
+      setIsFavorite(foodIsFavorite);
+    } else {
+      localStorage.favoriteRecipes = JSON.stringify([]);
+    }
+  });
 
   useEffect(() => {
     setMealValue({ item: meal, key: 'Meal', path: 'comidas', type: 'comida' });
@@ -40,7 +52,7 @@ const useFoodDetails = (path, id) => {
 
   const food = path.includes('comidas') ? mealValue : drinkValue;
 
-  return { loading, food, isInProgress, inProgress, type };
+  return { loading, food, isInProgress, inProgress, type, isFavorite };
 };
 
 export default useFoodDetails;
