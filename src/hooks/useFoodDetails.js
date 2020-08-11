@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getFoodById } from '../services/api';
+import checkIsFavorite from '../helpers/checkIsFavorite';
 
 const useFoodDetails = (path, id) => {
   const [meal, setMeal] = useState({});
@@ -35,15 +36,8 @@ const useFoodDetails = (path, id) => {
     } else {
       localStorage.inProgressRecipes = JSON.stringify({ cocktails: {}, meals: {} });
     }
-    if (localStorage.favoriteRecipes) {
-      const foodIsFavorite = JSON.parse(localStorage.favoriteRecipes).some(
-        (recipe) => recipe.id === id,
-      );
-      setIsFavorite(foodIsFavorite);
-    } else {
-      localStorage.favoriteRecipes = JSON.stringify([]);
-    }
-  });
+    setIsFavorite(checkIsFavorite(id));
+  }, []);
 
   useEffect(() => {
     setMealValue({ item: meal, key: 'Meal', path: 'comidas', type: 'comida' });
@@ -52,7 +46,7 @@ const useFoodDetails = (path, id) => {
 
   const food = path.includes('comidas') ? mealValue : drinkValue;
 
-  return { loading, food, isInProgress, inProgress, type, isFavorite };
+  return { loading, food, isInProgress, inProgress, type, isFavorite, setIsFavorite };
 };
 
 export default useFoodDetails;

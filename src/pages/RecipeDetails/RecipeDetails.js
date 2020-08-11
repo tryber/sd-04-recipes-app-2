@@ -13,7 +13,8 @@ import addToInProgressRecipes from '../../helpers/addToInProgressRecipes';
 import addToFavoriteRecipes from '../../helpers/addToFavoriteRecipes';
 import copyToClipboard from '../../helpers/copyToClipboard';
 import ShareBtn from '../../images/shareIcon.svg';
-import heartIcon from '../../images/whiteHeartIcon.svg';
+import whiteHeart from '../../images/whiteHeartIcon.svg';
+import blackHeart from '../../images/blackHeartIcon.svg';
 import useFoodDetails from '../../hooks/useFoodDetails';
 import Button from '../../styledComponents/Button/styles';
 
@@ -23,7 +24,15 @@ const RecipeDetails = ({
     path,
   },
 }) => {
-  const { type, loading, food, inProgress, isInProgress, isFavorite } = useFoodDetails(path, id);
+  const {
+    type,
+    loading,
+    food,
+    inProgress,
+    isInProgress,
+    isFavorite,
+    setIsFavorite,
+  } = useFoodDetails(path, id);
 
   if (loading) return <Loading />;
 
@@ -42,9 +51,14 @@ const RecipeDetails = ({
       <button
         data-testid="favorite-btn"
         type="button"
-        onClick={() => addToFavoriteRecipes(food, isFavorite)}
-        src={heartIcon}
-      />
+        src={isFavorite ? blackHeart : whiteHeart}
+        onClick={() => {
+          addToFavoriteRecipes(food, isFavorite);
+          setIsFavorite(!isFavorite);
+        }}
+      >
+        <img src={isFavorite ? blackHeart : whiteHeart} alt={`isFavorite? ${isFavorite}`} />
+      </button>
       <Category food={food.item} type={type} />
       <Ingredients food={food.item} path={path} />
       <Instructions instructions={food.item.strInstructions} />
