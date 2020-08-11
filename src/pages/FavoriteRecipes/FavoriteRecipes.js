@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Header, FilterButtons, FavoriteFoodCard } from '../../components';
+import PropTypes from 'prop-types';
+import { Header, FilterButtons, FoodInfoCard } from '../../components';
 
-const FavoriteRecipes = () => {
+const FavoriteRecipes = ({ match: { path } }) => {
   const initialFavoriteRecipes = JSON.parse(localStorage.favoriteRecipes);
   const [favoriteRecipes, setFavoriteRecipes] = useState(initialFavoriteRecipes);
 
@@ -24,7 +25,12 @@ const FavoriteRecipes = () => {
 
       <div>
         {favoriteRecipes.map((recipe, index) => (
-          <FavoriteFoodCard recipe={recipe} index={index} removeFromFavorite={removeFromFavorite} />
+          <FoodInfoCard
+            recipe={recipe}
+            index={index}
+            path={path}
+            removeFromFavorite={removeFromFavorite}
+          />
         ))}
       </div>
     </div>
@@ -32,3 +38,9 @@ const FavoriteRecipes = () => {
 };
 
 export default FavoriteRecipes;
+
+FavoriteRecipes.propTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+};

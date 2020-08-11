@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import ShareBtn from '../../images/shareIcon.svg';
 import FavoriteBtn from '../../images/blackHeartIcon.svg';
 
-const FavoriteFoodCard = ({
-  recipe: { id, type, area, category, alcoholicOrNot, name, image },
+const DoneFoodCard = ({
+  recipe: { id, type, area, category, alcoholicOrNot, name, image, doneDate, tags },
   index,
   removeFromFavorite,
+  path,
 }) => {
   const copyToClipboard = (foodType, foodId) => {
     const url = `${window.location.origin}/${foodType}/${foodId}`;
@@ -16,6 +17,7 @@ const FavoriteFoodCard = ({
   };
 
   const isMeal = type === 'comidas';
+  const isDone = path.includes('feitas');
 
   return (
     <div>
@@ -30,16 +32,30 @@ const FavoriteFoodCard = ({
       <button type="button" onClick={() => copyToClipboard(type, id)}>
         <img data-testid={`${index}-horizontal-share-btn`} src={ShareBtn} alt="share-btn" />
       </button>
-      <button type="button" onClick={() => removeFromFavorite(type, id)}>
-        <img data-testid={`${index}-horizontal-favorite-btn`} src={FavoriteBtn} alt="share-btn" />
-      </button>
+      {isDone && (
+        <div>
+          <p data-testid={`${index}-horizontal-done-date`}>{doneDate}</p>
+          {isMeal &&
+            tags
+              .slice(0, 2)
+              .map((tagName) => (
+                <p data-testid={`${index}-${tagName}-horizontal-tag`}>{tagName}</p>
+              ))}
+        </div>
+      )}
+
+      {!isDone && (
+        <button type="button" onClick={() => removeFromFavorite(type, id)}>
+          <img data-testid={`${index}-horizontal-favorite-btn`} src={FavoriteBtn} alt="share-btn" />
+        </button>
+      )}
     </div>
   );
 };
 
-export default FavoriteFoodCard;
+export default DoneFoodCard;
 
-FavoriteFoodCard.propTypes = {
+DoneFoodCard.propTypes = {
   recipe: PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -48,7 +64,14 @@ FavoriteFoodCard.propTypes = {
     alcoholicOrNot: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
+    doneDate: PropTypes.string,
+    tags: PropTypes.string,
   }).isRequired,
   index: PropTypes.string.isRequired,
-  removeFromFavorite: PropTypes.func.isRequired,
+  removeFromFavorite: PropTypes.func,
+  path: PropTypes.string.isRequired,
+};
+
+DoneFoodCard.defaultProps = {
+  removeFromFavorite: () => {},
 };

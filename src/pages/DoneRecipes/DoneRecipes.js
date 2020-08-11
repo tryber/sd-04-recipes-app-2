@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { Header, FilterButtons, DoneFoodCard } from '../../components';
+import PropTypes from 'prop-types';
+import { Header, FilterButtons, FoodInfoCard } from '../../components';
 
-const DoneRecipes = () => {
+const DoneRecipes = ({
+  match: {
+    path,
+  },
+}) => {
   const initialDoneRecipes = JSON.parse(localStorage.doneRecipes);
   const [doneRecipes, setDoneRecipes] = useState(initialDoneRecipes);
 
@@ -15,7 +20,7 @@ const DoneRecipes = () => {
       />
       <div>
         {doneRecipes.map((recipe, index) => (
-          <DoneFoodCard recipe={recipe} index={index} />
+          <FoodInfoCard recipe={recipe} index={index} path={path} />
         ))}
       </div>
     </div>
@@ -23,3 +28,9 @@ const DoneRecipes = () => {
 };
 
 export default DoneRecipes;
+
+DoneRecipes.propTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+};
