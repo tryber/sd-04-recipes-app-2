@@ -28,3 +28,6 @@ export const getFoodsByFirstLetter = (type, firstLetter) =>
 
 export const getFoodsByCategory = (type, category) =>
   fetchApi(`https://www.the${type}db.com/api/json/v1/1/filter.php?c=${category}`);
+
+export const getFoodByRandom = (type) =>
+  fetchApi(`https://www.the${type}db.com/api/json/v1/1/random.php`);
