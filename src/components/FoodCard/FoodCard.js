@@ -28,6 +28,6 @@ FoodCard.propTypes = {
   thumb: PropTypes.string.isRequired,
   str: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   foodType: PropTypes.string.isRequired,
 };

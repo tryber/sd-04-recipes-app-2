@@ -21,4 +21,9 @@ const Button = styled.button`
   }
 `;
 
+Button.fixed = styled.button`
+  position: fixed;
+  bottom: 0px;
+`;
+
 export default Button;

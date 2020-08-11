@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Login, MainPage, RecipeDetails, DoneRecipes } from './pages';
 import { BottomMenu } from './components';
+import { Login, MainPage, RecipeDetails, DoneRecipes, Explore, ExploreFood } from './pages';
 
 const Routes = () => (
   <BrowserRouter>
@@ -19,6 +19,12 @@ const Routes = () => (
         <Route exact path="/explorar/bebidas" component={} />
         <Route exact path="/explorar/comidas/ingredientes" component={} />
         <Route exact path="/explorar/bebidas/ingredientes" component={} />
+      <Route exact path="/explorar" component={Explore} />
+      <Route exact path="/explorar/comidas" component={ExploreFood} />
+      <Route exact path="/explorar/bebidas" component={ExploreFood} />
+      {/*
+      <Route exact path="/explorar/comidas/ingredientes" component={MainPage} />
+      <Route exact path="/explorar/bebidas/ingredientes" component={MainPage} />
         <Route exact path="/explorar/comidas/area" component={} />
         <Route exact path="/perfil" component={} /> */}
 
