@@ -9,6 +9,7 @@ import {
   Recomendations,
   Category,
 } from '../../components';
+import AppContainer from '../../styledComponents/AppContainer/styles';
 import addToInProgressRecipes from '../../helpers/addToInProgressRecipes';
 import addToFavoriteRecipes from '../../helpers/addToFavoriteRecipes';
 import copyToClipboard from '../../helpers/copyToClipboard';
@@ -37,7 +38,7 @@ const RecipeDetails = ({
   if (loading) return <Loading />;
 
   return (
-    <div>
+    <AppContainer>
       <img
         data-testid="recipe-photo"
         src={food.item[`str${food.key}Thumb`]}
@@ -85,7 +86,7 @@ const RecipeDetails = ({
           <Button.fixed data-testid="finish-recipe-btn">Finish Recipe</Button.fixed>
         </Link>
       )}
-    </div>
+    </AppContainer>
   );
 };
 
