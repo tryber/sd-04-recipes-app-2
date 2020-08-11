@@ -1,27 +1,15 @@
-const addToInProgressRecipes = (foodItem, isInProgress) => {
-  console.log(foodItem);
+const addToInProgressRecipes = (foodItem, type, isInProgress) => {
+  // console.log(foodItem);
   if (isInProgress) return null;
-  if (foodItem.key === 'Meal') {
-    const mealsInProgress = JSON.parse(localStorage.inProgressRecipes);
-    console.log('isMeal');
-    localStorage.inProgressRecipes = JSON.stringify({
-      ...JSON.parse(localStorage.inProgressRecipes),
-      meals: {
-        ...mealsInProgress.meals,
-        [foodItem.item.idMeal]: Object.keys(foodItem.item)
-          .filter((item) => item.includes('strIngredient') && foodItem.item[item])
-          .map((ingredient) => foodItem.item[ingredient]),
-      },
-    });
-  } else {
-    localStorage.inProgressRecipes = JSON.stringify({
-      ...localStorage.inProgressRecipes,
-      cocktails: {
-        ...localStorage.inProgressRecipes.cocktails,
-        [foodItem.item.idDrink]: [foodItem.item],
-      },
-    });
-  }
+  localStorage.inProgressRecipes = JSON.stringify({
+    ...JSON.parse(localStorage.inProgressRecipes),
+    [`${type}s`]: {
+      ...JSON.parse(localStorage.inProgressRecipes)[`${type}s`],
+      [foodItem.item[`id${foodItem.key}`]]: Object.keys(foodItem.item)
+        .filter((item) => item.includes('strIngredient') && foodItem.item[item])
+        .map((ingredient) => foodItem.item[ingredient]),
+    },
+  });
   return foodItem.item;
 };
 

@@ -47,7 +47,7 @@ const Recomendations = ({ type }) => {
           {recomendations.slice(0, 6).map((recomendation, index) => {
             if (index <= 1) {
               return (
-                <RecContainer.RecCard>
+                <RecContainer.RecCard key={recomendation[`str${recKey}`]}>
                   <RecContainer.Img
                     data-testid={`${index}-recomendation-card`}
                     src={recomendation[`str${recKey}Thumb`]}

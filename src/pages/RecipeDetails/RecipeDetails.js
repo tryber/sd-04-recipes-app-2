@@ -21,6 +21,8 @@ const RecipeDetails = ({
 }) => {
   const { type, loading, food, inProgress, isInProgress } = useFoodDetails(path, id);
 
+  console.log(type)
+
   if (loading) return <Loading />;
 
   return (
@@ -48,7 +50,7 @@ const RecipeDetails = ({
           <Link to={`/${food.path}/${food.item[`id${food.key}`]}/in-progress`}>
             <Button.fixed
               data-testid="start-recipe-btn"
-              onClick={() => addToInProgressRecipes(food, isInProgress)}
+              onClick={() => addToInProgressRecipes(food, type, isInProgress)}
             >
               {isInProgress ? 'Continuar Receita' : 'Iniciar Receita'}
             </Button.fixed>
@@ -66,7 +68,7 @@ const RecipeDetails = ({
 
 RecipeDetails.propTypes = {
   match: PropTypes.shape({
-    params: PropTypes.shape({ id: PropTypes.number }),
+    params: PropTypes.shape({ id: PropTypes.string }),
     path: PropTypes.string.isRequired,
   }).isRequired,
 };

@@ -78,6 +78,7 @@ const MainPage = ({ match: { path } }) => {
       </button>
       {foods.categories.slice(0, 5).map(({ strCategory }) => (
         <button
+          key={strCategory}
           data-testid={`${strCategory}-category-filter`}
           type="button"
           onClick={() => filterByCategory(strCategory)}

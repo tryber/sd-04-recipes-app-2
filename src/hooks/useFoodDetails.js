@@ -23,9 +23,9 @@ const useFoodDetails = (path, id) => {
       }
       setLoading(false);
       if (localStorage.inProgressRecipes) {
-        const foodsInProgress = JSON.parse(localStorage.inProgressRecipes);
-        console.log(foodsInProgress.meals);
-        const foodIsInProgress = Object.keys(foodsInProgress.meals).includes(resp[0][`id${key}`]);
+        const foodIsInProgress = Object.keys(
+          JSON.parse(localStorage.inProgressRecipes)[`${type}s`],
+        ).includes(resp[0][`id${key}`]);
         setIsInProgress(foodIsInProgress);
       } else {
         localStorage.inProgressRecipes = JSON.stringify({ cocktails: {}, meals: {} });
@@ -40,7 +40,7 @@ const useFoodDetails = (path, id) => {
 
   const food = path.includes('comidas') ? mealValue : drinkValue;
 
-  return { loading, food, isInProgress, inProgress };
+  return { loading, food, isInProgress, inProgress, type };
 };
 
 export default useFoodDetails;
