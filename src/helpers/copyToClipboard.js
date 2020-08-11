@@ -3,6 +3,7 @@ const copyToClipboard = (type, foodId, element) => {
   navigator.clipboard.writeText(url);
   const messageElement = document.createElement('p');
   messageElement.innerHTML = 'Link copiado!';
+
   element.parentNode.appendChild(messageElement);
 };
 
