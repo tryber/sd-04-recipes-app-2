@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { BottomMenu } from './components';
 import { Login, MainPage, RecipeDetails, DoneRecipes, Explore, ExploreFood } from './pages';
 
 const Routes = () => (
@@ -13,20 +12,13 @@ const Routes = () => (
       <Route exact path="/bebidas/:id" component={RecipeDetails} />
       <Route exact path="/comidas/:id/in-progress" component={RecipeDetails} />
       <Route exact path="/bebidas/:id/in-progress" component={RecipeDetails} />
-      <Route exact path="/explorar" component={BottomMenu} />
-
-      {/* <Route exact path="/explorar/comidas" component={} />
-        <Route exact path="/explorar/bebidas" component={} />
-        <Route exact path="/explorar/comidas/ingredientes" component={} />
-        <Route exact path="/explorar/bebidas/ingredientes" component={} />
       <Route exact path="/explorar" component={Explore} />
       <Route exact path="/explorar/comidas" component={ExploreFood} />
       <Route exact path="/explorar/bebidas" component={ExploreFood} />
-      {/*
-      <Route exact path="/explorar/comidas/ingredientes" component={MainPage} />
-      <Route exact path="/explorar/bebidas/ingredientes" component={MainPage} />
-        <Route exact path="/explorar/comidas/area" component={} />
-        <Route exact path="/perfil" component={} /> */}
+      {/* <Route exact path="/explorar/comidas/ingredientes" component={} />
+      <Route exact path="/explorar/bebidas/ingredientes" component={} /> */}
+      {/* <Route exact path="/explorar/comidas/area" component={} /> */}
+      {/* <Route exact path="/perfil" component={} /> */}
 
       <Route exact path="/receitas-feitas" component={DoneRecipes} />
       {/* <Route exact path="/receitas-favoritas" component={} /> */}
