@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { BottomMenu, Header, Loading } from '../../components';
 import { getIngredientsList, getURLIngredientsImg } from '../../services/api';
@@ -42,3 +43,9 @@ const ExploreIngredients = ({ match: { path } }) => {
 };
 
 export default ExploreIngredients;
+
+ExploreIngredients.propTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+};
