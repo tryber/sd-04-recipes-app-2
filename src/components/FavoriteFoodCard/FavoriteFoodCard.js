@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ShareBtn from '../../images/shareIcon.svg';
+import FavoriteBtn from '../../images/blackHeartIcon.svg';
 
-const DoneFoodCard = ({
-  recipe: { id, type, area, category, alcoholicOrNot, name, image, doneDate, tags },
+const FavoriteFoodCard = ({
+  recipe: { id, type, area, category, alcoholicOrNot, name, image },
   index,
+  removeFromFavorite,
 }) => {
   const copyToClipboard = (foodType, foodId) => {
     const url = `${window.location.origin}/${foodType}/${foodId}`;
@@ -28,18 +30,16 @@ const DoneFoodCard = ({
       <button type="button" onClick={() => copyToClipboard(type, id)}>
         <img data-testid={`${index}-horizontal-share-btn`} src={ShareBtn} alt="share-btn" />
       </button>
-      <p data-testid={`${index}-horizontal-done-date`}>{doneDate}</p>
-      {isMeal &&
-        tags
-          .slice(0, 2)
-          .map((tagName) => <p data-testid={`${index}-${tagName}-horizontal-tag`}>{tagName}</p>)}
+      <button type="button" onClick={() => removeFromFavorite(type, id)}>
+        <img data-testid={`${index}-horizontal-favorite-btn`} src={FavoriteBtn} alt="share-btn" />
+      </button>
     </div>
   );
 };
 
-export default DoneFoodCard;
+export default FavoriteFoodCard;
 
-DoneFoodCard.propTypes = {
+FavoriteFoodCard.propTypes = {
   recipe: PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -48,8 +48,7 @@ DoneFoodCard.propTypes = {
     alcoholicOrNot: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    doneDate: PropTypes.string.isRequired,
-    tags: PropTypes.string.isRequired,
   }).isRequired,
   index: PropTypes.string.isRequired,
+  removeFromFavorite: PropTypes.func.isRequired,
 };
