@@ -21,8 +21,6 @@ const RecipeDetails = ({
 }) => {
   const { type, loading, food, inProgress, isInProgress } = useFoodDetails(path, id);
 
-  console.log(type)
-
   if (loading) return <Loading />;
 
   return (
