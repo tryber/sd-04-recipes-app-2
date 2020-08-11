@@ -41,7 +41,7 @@ const Recomendations = ({ type }) => {
   if (loading) return <p>Loading...</p>;
   return (
     <div>
-      <h3>Recomendations</h3>
+      <h3>Recommendations</h3>
       <RecContainer>
         <RecContainer.Carousel>
           {recomendations.slice(0, 6).map((recomendation, index) => {
