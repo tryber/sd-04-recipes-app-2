@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BottomMenu, Header, Loading } from '../../components';
-import { getIngredientsList, URLIngredientsImg } from '../../services/api';
+import { getIngredientsList, getURLIngredientsImg } from '../../services/api';
 
 const ExploreIngredients = ({ match: { path } }) => {
   const [loading, setLoading] = useState(true);
@@ -19,20 +19,21 @@ const ExploreIngredients = ({ match: { path } }) => {
   }, []);
 
   if (loading) return <Loading />;
-  console.log('ingredientsName: ', ingredientsName);
-  console.log('ingredientsName: ', ingredientsName[0][ingredientNameKey]);
   return (
     <div>
       <Header pageTitle="Explorar Ingredientes" />
-      {ingredientsName.map((index) => (
-        <Link to={`/${pathIngredient}`} key={index[ingredientNameKey]}>
-          {console.log(index)}
+      {ingredientsName.map((ingredient, index) => (
+        <Link
+          to={`/${pathIngredient}`}
+          key={ingredient[ingredientNameKey]}
+          data-testid={`${index}-ingredient-card`}
+        >
           <img
-            data-testid={`${index}-ingredient-card`}
-            src={URLIngredientsImg(type, index[ingredientNameKey])}
-            alt={`${index[ingredientNameKey]}`}
+            data-testid={`${index}-card-img`}
+            src={getURLIngredientsImg(type, ingredient[ingredientNameKey])}
+            alt={`${ingredient[ingredientNameKey]}`}
           />
-          <p data-testid={`${index}-card-name`}>{index[ingredientNameKey]}</p>
+          <p data-testid={`${index}-card-name`}>{ingredient[ingredientNameKey]}</p>
         </Link>
       ))}
       <BottomMenu />
