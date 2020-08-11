@@ -24,7 +24,7 @@ const ExploreIngredients = ({ match: { path } }) => {
       <Header pageTitle="Explorar Ingredientes" />
       {ingredientsName.map((ingredient, index) => (
         <Link
-          to={`/${pathIngredient}`}
+          to={{ pathname: `/${pathIngredient}`, searchByIngredient: ingredient[ingredientNameKey] }}
           key={ingredient[ingredientNameKey]}
           data-testid={`${index}-ingredient-card`}
         >
