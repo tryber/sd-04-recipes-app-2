@@ -31,3 +31,9 @@ export const getFoodsByCategory = (type, category) =>
 
 export const getFoodByRandom = (type) =>
   fetchApi(`https://www.the${type}db.com/api/json/v1/1/random.php`);
+
+export const getIngredientsList = (type) =>
+  fetchApi(`https://www.the${type}db.com/api/json/v1/1/list.php?i=list`);
+
+export const URLIngredientsImg = (type, name) =>
+  `https://www.the${type}db.com/images/ingredients/${name}.png`;
