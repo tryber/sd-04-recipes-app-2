@@ -10,6 +10,8 @@ import {
   Category,
 } from '../../components';
 import addToInProgressRecipes from '../../helpers/addToInProgressRecipes';
+import copyToClipboard from '../../helpers/copyToClipboard';
+import ShareBtn from '../../images/shareIcon.svg';
 import useFoodDetails from '../../hooks/useFoodDetails';
 import Button from '../../styledComponents/Button/styles';
 
@@ -32,6 +34,9 @@ const RecipeDetails = ({
         style={{ width: '30vw' }}
       />
       <h1 data-testid="recipe-title">{food.item[`str${food.key}`]}</h1>
+      <button data-testid="share-btn" type="button" onClick={() => copyToClipboard(type, id)}>
+        <img src={ShareBtn} alt="share-btn" />
+      </button>
       <Category food={food.item} type={type} />
       <button type="button" data-testid="share-btn">
         Icone twitter

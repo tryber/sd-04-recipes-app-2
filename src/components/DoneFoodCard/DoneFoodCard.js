@@ -2,17 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ShareBtn from '../../images/shareIcon.svg';
+import copyToClipboard from '../../helpers/copyToClipboard';
 
 const DoneFoodCard = ({
   recipe: { alcoholicOrNot, id, image, name, area, category, doneDate, tags },
   index,
 }) => {
-  const copyToClipboard = (type, foodId) => {
-    const url = `${window.location.origin}/${type}/${foodId}`;
-    navigator.clipboard.writeText(url);
-    alert('Link copiado!');
-  };
-
   const isMeal = alcoholicOrNot.length < 1;
   const type = isMeal ? 'comidas' : 'bebidas';
 
