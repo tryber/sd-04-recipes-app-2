@@ -11,7 +11,7 @@ const addToFavoriteRecipes = (food, isFavorite) => {
     type,
     area: item.strArea,
     category: item.strCategory,
-    alcoholicOrNot: item.strAlcoholic,
+    alcoholicOrNot: item.strAlcoholic || '',
     name: item[`str${key}`],
     image: item[`str${key}Thumb`],
   };

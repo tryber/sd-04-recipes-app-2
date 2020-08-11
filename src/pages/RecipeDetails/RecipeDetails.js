@@ -45,7 +45,11 @@ const RecipeDetails = ({
         style={{ width: '30vw' }}
       />
       <h1 data-testid="recipe-title">{food.item[`str${food.key}`]}</h1>
-      <button data-testid="share-btn" type="button" onClick={() => copyToClipboard(food.path, id)}>
+      <button
+        data-testid="share-btn"
+        type="button"
+        onClick={(e) => copyToClipboard(food.path, id, e.target)}
+      >
         <img src={ShareBtn} alt="share-btn" />
       </button>
       <button
