@@ -20,7 +20,11 @@ const Profile = () => {
         </button>
       </Link>
       <Link to="/">
-        <button type="button" data-testid="profile-logout-btn" onClick={() => window.localStorage.clear()}>
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+          onClick={() => window.localStorage.clear()}
+        >
           Sair
         </button>
       </Link>
