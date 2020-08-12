@@ -3,8 +3,9 @@ const copyToClipboard = (type, foodId, element) => {
   navigator.clipboard.writeText(url);
   const messageElement = document.createElement('p');
   messageElement.innerHTML = 'Link copiado!';
+  const parentElement = element.parentNode.parentNode;
 
-  element.parentNode.appendChild(messageElement);
+  parentElement.insertBefore(messageElement, parentElement.childNodes[2]);
 };
 
 export default copyToClipboard;

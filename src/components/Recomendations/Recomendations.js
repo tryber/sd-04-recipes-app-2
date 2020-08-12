@@ -4,21 +4,28 @@ import styled from 'styled-components';
 import { getFoodsByName } from '../../services/api';
 
 const RecContainer = styled.div`
-  width: 100vw;
+  width: 80vw;
   height: fit-content;
+  overflow: hidden;
 `;
 
 RecContainer.Carousel = styled.div`
   display: flex;
+  overflow: hidden;
 `;
+
 RecContainer.RecCard = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
+RecContainer.RecCardInvisible = styled.div`
+  visibility: hidden;
+`;
+
 RecContainer.Img = styled.img`
-  width: 40vw;
-  padding: 10%;
+  width: 33vw;
+  padding: 5%;
 `;
 
 RecContainer.InvisibleImg = styled.img`
@@ -60,14 +67,14 @@ const Recomendations = ({ type }) => {
               );
             }
             return (
-              <RecContainer.RecCard key={recomendation[`str${recKey}`]}>
+              <RecContainer.RecCardInvisible key={recomendation[`str${recKey}`]}>
                 <RecContainer.InvisibleImg
                   data-testid={`${index}-recomendation-card`}
                   src={recomendation[`str${recKey}Thumb`]}
                   alt={recomendation[`str${recKey}`]}
                 />
                 <p data-testid={`${index}-recomendation-title`}>{recomendation[`str${recKey}`]}</p>
-              </RecContainer.RecCard>
+              </RecContainer.RecCardInvisible>
             );
           })}
         </RecContainer.Carousel>

@@ -5,7 +5,7 @@ const addToFavoriteRecipes = (food, isFavorite) => {
     localStorage.favoriteRecipes = JSON.stringify([
       ...JSON.parse(localStorage.favoriteRecipes).filter(({ id }) => id !== item[`id${key}`]),
     ]);
-    return JSON.parse(localStorage.favoriteRecipe);
+    return 'removed from favorites';
   }
 
   const favoriteRecipe = {
@@ -23,7 +23,7 @@ const addToFavoriteRecipes = (food, isFavorite) => {
     favoriteRecipe,
   ]);
 
-  return JSON.parse(localStorage.favoriteRecipe);
+  return 'added to favorites';
 };
 
 export default addToFavoriteRecipes;
