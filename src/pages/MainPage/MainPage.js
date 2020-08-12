@@ -19,9 +19,10 @@ const FoodsContainer = styled.div`
   justify-content: space-around;
 `;
 
-const MainPage = ({ match: { path } }) => {
+const MainPage = ({ match: { path }, location: { searchByIngredient } }) => {
   const [categoryFiltered, setCategoryFiltered] = useState(null);
 
+  // console.log(searchByIngredient);
   const {
     loading,
     // mealsCategories,
@@ -72,7 +73,7 @@ const MainPage = ({ match: { path } }) => {
 
   return (
     <div>
-      <Header pageTitle={foods.title} />
+      <Header pageTitle={foods.title} ingredient={searchByIngredient} />
       <button data-testid="All-category-filter" type="button" onClick={() => filterByCategory()}>
         All
       </button>
@@ -108,5 +109,8 @@ export default MainPage;
 MainPage.propTypes = {
   match: PropTypes.shape({
     path: PropTypes.string.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    searchByIngredient: PropTypes.string,
   }).isRequired,
 };

@@ -8,9 +8,18 @@ const ExploreFood = ({ match: { path } }) => {
   const [food, setFood] = useState([]);
   const [loading, setLoading] = useState(true);
   const page = path.includes('comidas');
-  const pathFood = page ? 'comidas' : 'bebidas';
-  const type = page ? 'meal' : 'cocktail';
-  const key = page ? 'Meal' : 'Drink';
+
+  let pathFood = 'bebidas';
+  let type = 'cocktail';
+  let key = 'Drink';
+  let title = 'Explorar Bebidas';
+
+  if (page) {
+    pathFood = 'comidas';
+    type = 'meal';
+    key = 'Meal';
+    title = 'Explorar Comidas';
+  }
 
   useEffect(() => {
     getFoodByRandom(type).then((resp) => {
@@ -19,11 +28,10 @@ const ExploreFood = ({ match: { path } }) => {
     });
   }, []);
 
-  // console.log(food);
   if (loading) return <Loading />;
   return (
     <div>
-      <Header pageTitle="Explorar" />
+      <Header pageTitle={title} />
       <Link to={`/explorar/${pathFood}/ingredientes`} data-testid="explore-by-ingredient">
         Por Ingredientes
       </Link>
