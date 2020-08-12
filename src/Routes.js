@@ -8,6 +8,7 @@ import {
   Explore,
   ExploreFood,
   ExploreIngredients,
+  Profile,
 } from './pages';
 
 const Routes = () => (
@@ -26,7 +27,7 @@ const Routes = () => (
       <Route exact path="/explorar/comidas/ingredientes" component={ExploreIngredients} />
       <Route exact path="/explorar/bebidas/ingredientes" component={ExploreIngredients} />
       {/* <Route exact path="/explorar/comidas/area" component={} /> */}
-      {/* <Route exact path="/perfil" component={} /> */}
+      <Route exact path="/perfil" component={Profile} />
 
       <Route exact path="/receitas-feitas" component={DoneRecipes} />
       {/* <Route exact path="/receitas-favoritas" component={} /> */}
