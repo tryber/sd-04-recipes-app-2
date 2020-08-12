@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const FilterButtons = ({ initialRecipes, recipes, setFunc }) => {
-  const filterButtons = ['All', 'Food', 'Drinks'];
-
   const filterByCategory = (category) => {
     switch (category) {
       case 'All':
