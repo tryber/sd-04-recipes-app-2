@@ -60,7 +60,7 @@ const Recomendations = ({ type }) => {
               );
             }
             return (
-              <RecContainer.RecCard>
+              <RecContainer.RecCard key={recomendation[`str${recKey}`]}>
                 <RecContainer.InvisibleImg
                   data-testid={`${index}-recomendation-card`}
                   src={recomendation[`str${recKey}Thumb`]}
