@@ -1,5 +1,4 @@
 const addToInProgressRecipes = (foodItem, type, isInProgress) => {
-  // console.log(foodItem);
   if (isInProgress) return null;
   localStorage.inProgressRecipes = JSON.stringify({
     ...JSON.parse(localStorage.inProgressRecipes),
