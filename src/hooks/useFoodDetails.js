@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getFoodById } from '../services/api';
+import checkIsFavorite from '../helpers/checkIsFavorite';
 
 const useFoodDetails = (path, id) => {
   const [meal, setMeal] = useState({});
@@ -7,6 +8,7 @@ const useFoodDetails = (path, id) => {
   const [drink, setDrink] = useState({});
   const [drinkValue, setDrinkValue] = useState({});
   const [isInProgress, setIsInProgress] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const type = path.includes('comidas') ? 'meal' : 'cocktail';
@@ -14,23 +16,25 @@ const useFoodDetails = (path, id) => {
 
   useEffect(() => {
     getFoodById(type, id).then((resp) => {
-      let key = 'Meal';
       if (type === 'meal') {
         setMeal(resp[0]);
       } else {
-        key = 'Drink';
         setDrink(resp[0]);
       }
       setLoading(false);
-      if (localStorage.inProgressRecipes) {
-        const foodIsInProgress = Object.keys(
-          JSON.parse(localStorage.inProgressRecipes)[`${type}s`],
-        ).includes(resp[0][`id${key}`]);
-        setIsInProgress(foodIsInProgress);
-      } else {
-        localStorage.inProgressRecipes = JSON.stringify({ cocktails: {}, meals: {} });
-      }
     });
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.inProgressRecipes) {
+      const foodIsInProgress = Object.keys(
+        JSON.parse(localStorage.inProgressRecipes)[`${type}s`],
+      ).includes(id);
+      setIsInProgress(foodIsInProgress);
+    } else {
+      localStorage.inProgressRecipes = JSON.stringify({ cocktails: {}, meals: {} });
+    }
+    setIsFavorite(checkIsFavorite(id));
   }, []);
 
   useEffect(() => {
@@ -40,7 +44,7 @@ const useFoodDetails = (path, id) => {
 
   const food = path.includes('comidas') ? mealValue : drinkValue;
 
-  return { loading, food, isInProgress, inProgress, type };
+  return { loading, food, isInProgress, inProgress, type, isFavorite, setIsFavorite };
 };
 
 export default useFoodDetails;
