@@ -12,7 +12,7 @@ const FilterButtons = ({ initialRecipes, recipes, setFunc }) => {
       case 'Food':
         setFunc(recipes.filter((recipe) => recipe.type === 'comida'));
         break;
-      case 'Drink':
+      case 'Drinks':
         setFunc(recipes.filter((recipe) => recipe.type === 'bebida'));
         break;
       default:
@@ -22,16 +22,30 @@ const FilterButtons = ({ initialRecipes, recipes, setFunc }) => {
 
   return (
     <div>
-      {filterButtons.map((btn) => (
-        <button
-          data-testid={`filter-by-${btn.toLowerCase()}-btn`}
-          type="button"
-          key={btn}
-          onClick={() => filterByCategory(btn)}
-        >
-          {btn}
-        </button>
-      ))}
+      <button
+        data-testid="filter-by-all-btn"
+        type="button"
+        key="All"
+        onClick={() => filterByCategory('All')}
+      >
+        All
+      </button>
+      <button
+        data-testid="filter-by-food-btn"
+        type="button"
+        key="Food"
+        onClick={() => filterByCategory('Food')}
+      >
+        Food
+      </button>
+      <button
+        data-testid="filter-by-drink-btn"
+        type="button"
+        key="Drinks"
+        onClick={() => filterByCategory('Drinks')}
+      >
+        Drinks
+      </button>
     </div>
   );
 };

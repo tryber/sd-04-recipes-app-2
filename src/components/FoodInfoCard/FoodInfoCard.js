@@ -11,17 +11,18 @@ const DoneFoodCard = ({
   removeFromFavorite,
   path,
 }) => {
-  const isMeal = type === 'comidas';
+  const isMeal = type === 'comida';
   const isDone = path.includes('feitas');
+  const pathType = isMeal ? 'comidas' : 'bebidas';
 
   return (
     <div>
-      <Link to={`/${type}/${id}`}>
+      <Link to={`/${pathType}/${id}`}>
         <img data-testid={`${index}-horizontal-image`} src={image} alt={name} />
       </Link>
       {isMeal && <p data-testid={`${index}-horizontal-top-text`}>{`${area} - ${category}`}</p>}
       {!isMeal && <p data-testid={`${index}-horizontal-top-text`}>{alcoholicOrNot}</p>}
-      <Link to={`/${type}/${id}`}>
+      <Link to={`/${pathType}/${id}`}>
         <p data-testid={`${index}-horizontal-name`}>{name}</p>
       </Link>
       <button type="button" onClick={(e) => copyToClipboard(type, id, e.target)}>

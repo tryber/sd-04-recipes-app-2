@@ -8,10 +8,10 @@ const FavoriteRecipes = ({ match: { path } }) => {
 
   const removeFromFavorite = (foodType, foodId) => {
     const newFavList = initialFavoriteRecipes.filter(
-      (recipe) => recipe.id !== foodId && recipe.type === foodType,
+      (recipe) => recipe.id !== foodId,
     );
     setFavoriteRecipes(newFavList);
-    localStorage.favoriteRecipes = newFavList;
+    localStorage.favoriteRecipes = JSON.stringify(newFavList);
   };
 
   return (
@@ -19,7 +19,7 @@ const FavoriteRecipes = ({ match: { path } }) => {
       <Header pageTitle="Receitas Favoritas" />
       <FilterButtons
         initialRecipes={initialFavoriteRecipes}
-        recipes={favoriteRecipes}
+        recipes={initialFavoriteRecipes}
         setFunc={setFavoriteRecipes}
       />
 
