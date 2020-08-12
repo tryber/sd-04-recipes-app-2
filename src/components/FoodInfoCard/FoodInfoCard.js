@@ -18,14 +18,19 @@ const DoneFoodCard = ({
   return (
     <div>
       <Link to={`/${pathType}/${id}`}>
-        <img data-testid={`${index}-horizontal-image`} src={image} alt={name} />
+        <img
+          src={image}
+          alt={name}
+          data-testid={`${index}-horizontal-image`}
+          style={{ width: '30vw' }}
+        />
       </Link>
       {isMeal && <p data-testid={`${index}-horizontal-top-text`}>{`${area} - ${category}`}</p>}
       {!isMeal && <p data-testid={`${index}-horizontal-top-text`}>{alcoholicOrNot}</p>}
       <Link to={`/${pathType}/${id}`}>
         <p data-testid={`${index}-horizontal-name`}>{name}</p>
       </Link>
-      <button type="button" onClick={(e) => copyToClipboard(type, id, e.target)}>
+      <button type="button" onClick={(e) => copyToClipboard(pathType, id, e.target)}>
         <img data-testid={`${index}-horizontal-share-btn`} src={ShareBtn} alt="share-btn" />
       </button>
       {isDone && (
