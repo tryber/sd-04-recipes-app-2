@@ -11,7 +11,7 @@ const addToFavoriteRecipes = (food, isFavorite) => {
   const favoriteRecipe = {
     id: item[`id${key}`],
     type,
-    area: item.strArea,
+    area: item.strArea || '',
     category: item.strCategory,
     alcoholicOrNot: item.strAlcoholic || '',
     name: item[`str${key}`],
