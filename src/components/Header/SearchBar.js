@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Context } from '../../context/Context';
@@ -16,18 +16,13 @@ const checkIsNull = (resp) => {
 };
 
 const checkLength = (type, arr, setRedirect, foodType, setFunc) => {
+  const key = type === 'meal' ? 'Meal' : 'Drink';
   if (!arr) return null;
   if (arr.length === 1) {
     setRedirect({
       shouldRedirect: true,
       type: foodType.toLowerCase(),
-      id:
-        arr[0][
-          `id${type
-            .split('')
-            .map((char, i) => (i === 0 ? char.toUpperCase() : char))
-            .join('')}`
-        ],
+      id: arr[0][`id${key}`],
     });
   }
   return setFunc(arr);
@@ -67,11 +62,26 @@ const filterFoods = (foodType, input, option, setFunc, setRedirect) => {
   }
 };
 
-const SearchBar = ({ foodType }) => {
+const SearchBar = ({ foodType, ingredient }) => {
   const [redirect, setShoudlRedirect] = useState({ shouldRedirect: false, type: '', id: '' });
   const [inputText, setInputText] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const { setMeals, setDrinks } = useContext(Context);
+
+  useEffect(() => {
+    console.log(ingredient);
+    if (ingredient) {
+      let type = 'cocktail';
+      let setFunc = setDrinks;
+      if (foodType === 'Comidas') {
+        type = 'meal';
+        setFunc = setMeals;
+      }
+      getFoodsByIngredient(type, ingredient).then((resp) => {
+        checkAll(resp, type, setShoudlRedirect, foodType, setFunc);
+      });
+    }
+  }, []);
 
   const createInputRadio = (value, testid, name) => (
     <label htmlFor={value}>
@@ -119,4 +129,5 @@ export default SearchBar;
 
 SearchBar.propTypes = {
   foodType: PropTypes.string.isRequired,
+  ingredient: PropTypes.string.isRequired,
 };

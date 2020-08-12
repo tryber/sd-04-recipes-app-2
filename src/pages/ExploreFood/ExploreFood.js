@@ -11,6 +11,7 @@ const ExploreFood = ({ match: { path } }) => {
   const pathFood = page ? 'comidas' : 'bebidas';
   const type = page ? 'meal' : 'cocktail';
   const key = page ? 'Meal' : 'Drink';
+  const title = page ? 'Explorar Comidas' : 'Explorar Bebidas';
 
   useEffect(() => {
     getFoodByRandom(type).then((resp) => {
@@ -19,11 +20,10 @@ const ExploreFood = ({ match: { path } }) => {
     });
   }, []);
 
-  // console.log(food);
   if (loading) return <Loading />;
   return (
     <div>
-      <Header pageTitle="Explorar" />
+      <Header pageTitle={title} />
       <Link to={`/explorar/${pathFood}/ingredientes`} data-testid="explore-by-ingredient">
         Por Ingredientes
       </Link>
