@@ -8,7 +8,7 @@ import {
   Explore,
   ExploreFood,
   ExploreIngredients,
-  Profile
+  Profile,
 } from './pages';
 
 const Routes = () => (
