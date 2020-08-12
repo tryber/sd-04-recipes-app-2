@@ -37,7 +37,7 @@ const RecipeDetails = ({
 
   if (loading) return <Loading />;
 
-  const heartImage = heartImage;
+  const heartImage = isFavorite ? blackHeart : whiteHeart;
 
   return (
     <AppContainer>
