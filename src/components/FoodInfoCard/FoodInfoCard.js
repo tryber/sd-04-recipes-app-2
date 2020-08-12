@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ShareBtn from '../../images/shareIcon.svg';
 import FavoriteBtn from '../../images/blackHeartIcon.svg';
+import copyToClipboard from '../../helpers/copyToClipboard';
 
 const DoneFoodCard = ({
   recipe: { id, type, area, category, alcoholicOrNot, name, image, doneDate, tags },
@@ -10,12 +11,6 @@ const DoneFoodCard = ({
   removeFromFavorite,
   path,
 }) => {
-  const copyToClipboard = (foodType, foodId) => {
-    const url = `${window.location.origin}/${foodType}/${foodId}`;
-    navigator.clipboard.writeText(url);
-    alert('Link copiado!');
-  };
-
   const isMeal = type === 'comidas';
   const isDone = path.includes('feitas');
 
@@ -29,7 +24,7 @@ const DoneFoodCard = ({
       <Link to={`/${type}/${id}`}>
         <p data-testid={`${index}-horizontal-name`}>{name}</p>
       </Link>
-      <button type="button" onClick={() => copyToClipboard(type, id)}>
+      <button type="button" onClick={(e) => copyToClipboard(type, id, e.target)}>
         <img data-testid={`${index}-horizontal-share-btn`} src={ShareBtn} alt="share-btn" />
       </button>
       {isDone && (

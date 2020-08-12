@@ -84,10 +84,11 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
-#meals {
+/* #meals {
   display: flex;
   justify-content: center;
-}
+  width: 100vw;
+} */
 
 /* section, div {
   box-sizing: border-box;

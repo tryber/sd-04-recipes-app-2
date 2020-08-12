@@ -9,7 +9,13 @@ import {
   Recomendations,
   Category,
 } from '../../components';
+import AppContainer from '../../styledComponents/AppContainer/styles';
 import addToInProgressRecipes from '../../helpers/addToInProgressRecipes';
+import addToFavoriteRecipes from '../../helpers/addToFavoriteRecipes';
+import copyToClipboard from '../../helpers/copyToClipboard';
+import ShareBtn from '../../images/shareIcon.svg';
+import whiteHeart from '../../images/whiteHeartIcon.svg';
+import blackHeart from '../../images/blackHeartIcon.svg';
 import useFoodDetails from '../../hooks/useFoodDetails';
 import Button from '../../styledComponents/Button/styles';
 
@@ -19,12 +25,22 @@ const RecipeDetails = ({
     path,
   },
 }) => {
-  const { type, loading, food, inProgress, isInProgress } = useFoodDetails(path, id);
+  const {
+    type,
+    loading,
+    food,
+    inProgress,
+    isInProgress,
+    isFavorite,
+    setIsFavorite,
+  } = useFoodDetails(path, id);
 
   if (loading) return <Loading />;
 
+  const heartImage = isFavorite ? blackHeart : whiteHeart;
+
   return (
-    <div>
+    <AppContainer>
       <img
         data-testid="recipe-photo"
         src={food.item[`str${food.key}Thumb`]}
@@ -32,13 +48,25 @@ const RecipeDetails = ({
         style={{ width: '30vw' }}
       />
       <h1 data-testid="recipe-title">{food.item[`str${food.key}`]}</h1>
+      <button
+        data-testid="share-btn"
+        type="button"
+        onClick={(e) => copyToClipboard(food.path, id, e.target)}
+      >
+        <img src={ShareBtn} alt="share-btn" />
+      </button>
+      <button
+        data-testid="favorite-btn"
+        type="button"
+        src={heartImage}
+        onClick={() => {
+          addToFavoriteRecipes(food, isFavorite);
+          setIsFavorite(!isFavorite);
+        }}
+      >
+        <img src={heartImage} alt={`isFavorite? ${isFavorite}`} />
+      </button>
       <Category food={food.item} type={type} />
-      <button type="button" data-testid="share-btn">
-        Icone twitter
-      </button>
-      <button type="button" data-testid="favorite-btn">
-        Favoritar
-      </button>
       <Ingredients food={food.item} path={path} />
       <Instructions instructions={food.item.strInstructions} />
       {!inProgress && (
@@ -60,7 +88,7 @@ const RecipeDetails = ({
           <Button.fixed data-testid="finish-recipe-btn">Finish Recipe</Button.fixed>
         </Link>
       )}
-    </div>
+    </AppContainer>
   );
 };
 

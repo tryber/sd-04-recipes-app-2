@@ -10,7 +10,7 @@ const FavoriteRecipes = ({ match: { path } }) => {
     const newFavList = initialFavoriteRecipes.filter(
       (recipe) => recipe.id !== foodId && recipe.type === foodType,
     );
-    // setFavoriteRecipes(newFavList);
+    setFavoriteRecipes(newFavList);
     localStorage.favoriteRecipes = newFavList;
   };
 
