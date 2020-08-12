@@ -4,3 +4,4 @@ export { default as RecipeDetails } from './RecipeDetails/RecipeDetails';
 export { default as DoneRecipes } from './DoneRecipes/DoneRecipes';
 export { default as Explore } from './Explore/Explore';
 export { default as ExploreFood } from './ExploreFood/ExploreFood';
+export { default as ExploreIngredients } from './ExploreIngredients/ExploreIngredients';
