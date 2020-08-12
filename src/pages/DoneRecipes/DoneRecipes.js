@@ -1,43 +1,26 @@
 import React, { useState } from 'react';
-import { Header, DoneFoodCard } from '../../components';
+import PropTypes from 'prop-types';
+import { Header, FilterButtons, FoodInfoCard } from '../../components';
 
-const DoneRecipes = () => {
-  const filterButtons = ['All', 'Food', 'Drinks'];
+const DoneRecipes = ({
+  match: {
+    path,
+  },
+}) => {
   const initialDoneRecipes = JSON.parse(localStorage.doneRecipes);
   const [doneRecipes, setDoneRecipes] = useState(initialDoneRecipes);
-
-  const filterByCategory = (category) => {
-    switch (category) {
-      case 'All':
-        setDoneRecipes(initialDoneRecipes);
-        break;
-      case 'Food':
-        setDoneRecipes(doneRecipes.filter((recipe) => recipe.alcoholicOrNot.length < 1));
-        break;
-      case 'Drink':
-        setDoneRecipes(doneRecipes.filter((recipe) => recipe.alcoholicOrNot.length > 1));
-        break;
-      default:
-        break;
-    }
-  };
 
   return (
     <div>
       <Header pageTitle="Receitas Feitas" />
-      {filterButtons.map((btn) => (
-        <button
-          data-testid={`filter-by-${btn.toLowerCase()}-btn`}
-          type="button"
-          key={btn}
-          onClick={() => filterByCategory(btn)}
-        >
-          {btn}
-        </button>
-      ))}
+      <FilterButtons
+        initialRecipes={initialDoneRecipes}
+        recipes={doneRecipes}
+        setFunc={setDoneRecipes}
+      />
       <div>
         {doneRecipes.map((recipe, index) => (
-          <DoneFoodCard recipe={recipe} index={index} />
+          <FoodInfoCard recipe={recipe} index={index} path={path} />
         ))}
       </div>
     </div>
@@ -45,3 +28,9 @@ const DoneRecipes = () => {
 };
 
 export default DoneRecipes;
+
+DoneRecipes.propTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+};

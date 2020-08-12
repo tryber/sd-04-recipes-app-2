@@ -7,6 +7,7 @@ import {
   DoneRecipes,
   Explore,
   ExploreFood,
+  FavoriteRecipes,
   ExploreIngredients,
   Profile,
 } from './pages';
@@ -30,7 +31,7 @@ const Routes = () => (
       <Route exact path="/perfil" component={Profile} />
 
       <Route exact path="/receitas-feitas" component={DoneRecipes} />
-      {/* <Route exact path="/receitas-favoritas" component={} /> */}
+      <Route exact path="/receitas-favoritas" component={FavoriteRecipes} />
     </Switch>
   </BrowserRouter>
 );
