@@ -16,11 +16,9 @@ const useFoodDetails = (path, id) => {
 
   useEffect(() => {
     getFoodById(type, id).then((resp) => {
-      let key = 'Meal';
       if (type === 'meal') {
         setMeal(resp[0]);
       } else {
-        key = 'Drink';
         setDrink(resp[0]);
       }
       setLoading(false);

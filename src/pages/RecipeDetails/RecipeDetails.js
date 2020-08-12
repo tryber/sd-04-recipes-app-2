@@ -37,6 +37,8 @@ const RecipeDetails = ({
 
   if (loading) return <Loading />;
 
+  const heartImage = heartImage;
+
   return (
     <AppContainer>
       <img
@@ -56,13 +58,13 @@ const RecipeDetails = ({
       <button
         data-testid="favorite-btn"
         type="button"
-        src={isFavorite ? blackHeart : whiteHeart}
+        src={heartImage}
         onClick={() => {
           addToFavoriteRecipes(food, isFavorite);
           setIsFavorite(!isFavorite);
         }}
       >
-        <img src={isFavorite ? blackHeart : whiteHeart} alt={`isFavorite? ${isFavorite}`} />
+        <img src={heartImage} alt={`isFavorite? ${isFavorite}`} />
       </button>
       <Category food={food.item} type={type} />
       <Ingredients food={food.item} path={path} />
