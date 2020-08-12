@@ -4,6 +4,7 @@ import { Header, BottomMenu } from '../../components';
 
 const Profile = () => {
   const user = JSON.parse(localStorage.user);
+
   return (
     <div>
       <Header pageTitle="Perfil" />
